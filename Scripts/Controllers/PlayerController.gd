@@ -19,6 +19,12 @@ var on_ground = false
 var reloaded = true
 var move_state = "stand"
 
+var current_time = 100
+var max_time = 100
+var bullet_time_toggled = false
+
+onready var UI = get_parent().get_node("UI")
+
 func _input(event):
 	if frozen:
 		return
@@ -33,18 +39,39 @@ func _input(event):
 			$Head/Camera.rotate_x(deg2rad(-x_delta))
 			camera_x_rotation += x_delta
 
+func _process(delta):
+	UI.update_time_meter(current_time)
+	if bullet_time_toggled:
+		current_time -= 100*delta
+	else:
+		current_time += 5*delta
+	if current_time <= 0:
+		toggle_bullet_time(false)
+
 func _physics_process(delta):
 	move_state = "stand"
 	if frozen:
 		return
 	var space_state = get_world().direct_space_state
-	
-	if Input.is_action_just_pressed("shoot") and reloaded:
-		#$Head/Camera/Gun.shoot()	
+	if Input.is_action_just_pressed("shoot") and reloaded:	
 		shoot()
-		
+	if Input.is_action_just_pressed("toggle_bullet_time"):
+		if bullet_time_toggled:
+			toggle_bullet_time(false)
+		elif current_time > 0:
+			toggle_bullet_time(true)
+	movement(delta)
+
+func toggle_bullet_time(toggle):
+	if !toggle:
+		bullet_time_toggled = false
+		Engine.set_time_scale(1)
+	else:
+		bullet_time_toggled = true
+		Engine.set_time_scale(0.1)	
+
+func movement(delta):
 	var head_basis = $Head.get_global_transform().basis
-	
 	var direction = Vector3()
 	var walking = false
 	if Input.is_action_pressed("move_forward"):
@@ -80,7 +107,7 @@ func _physics_process(delta):
 			jumps -= 1
 	
 	velocity = move_and_slide(velocity, Vector3.UP)
-
+	
 func shoot():
 	var clone = bullet.instance()
 	var scene_root = get_parent()

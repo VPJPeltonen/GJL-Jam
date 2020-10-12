@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Controllers/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Props/Box.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Guns/Revolver.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Effects/Bullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Props/Wall.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Controllers/UIController.gd" type="Script" id=7]
 
 [sub_resource type="CapsuleMesh" id=3]
 
@@ -183,6 +184,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35.9137, 0.65741, 30.7209 )
 [node name="UI" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -214,6 +216,26 @@ color = Color( 1, 1, 1, 0.588235 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Time" type="VBoxContainer" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 113.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Time"]
+margin_right = 113.0
+margin_bottom = 14.0
+text = "Time:"
+align = 1
+
+[node name="Bar" type="ProgressBar" parent="UI/Time"]
+margin_top = 18.0
+margin_right = 113.0
+margin_bottom = 32.0
 [connection signal="body_entered" from="Player/Feet" to="Player" method="_on_Feet_body_entered"]
 [connection signal="body_exited" from="Player/Feet" to="Player" method="_on_Feet_body_exited"]
 [connection signal="timeout" from="Player/ReloadTimer" to="Player" method="_on_ReloadTimer_timeout"]
