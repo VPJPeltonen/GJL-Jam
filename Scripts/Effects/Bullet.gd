@@ -1,6 +1,7 @@
 extends Spatial
 
-var speed = 70
+var speed = 150
+
 var damage = 15
 
 var life_time = 4
