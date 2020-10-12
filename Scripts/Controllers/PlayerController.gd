@@ -1,8 +1,8 @@
 extends KinematicBody
 
-export var speed = 10
+export var speed = 15
 export var acceleration = 5
-export var gravity = 0.7
+export var gravity = 0.9
 export var jump_power = 60
 export var jumps = 2
 export var mouse_sens = 0.3
@@ -24,6 +24,9 @@ var max_time = 100
 var bullet_time_toggled = false
 
 onready var UI = get_parent().get_node("UI")
+onready var bullet_source = get_node("Head/Camera/Position3D")
+onready var sun = get_parent().get_node("Enviroment/Lighting/Sun")
+onready var world = get_parent().get_node("Enviroment/Lighting/WorldEnvironment")
 
 func _input(event):
 	if frozen:
@@ -41,9 +44,11 @@ func _input(event):
 
 func _process(delta):
 	UI.update_time_meter(current_time)
+	sun.light_energy = current_time/max_time
+	world.environment.background_sky.sky_energy = current_time/max_time
 	if bullet_time_toggled:
 		current_time -= 100*delta
-	else:
+	elif current_time < 100:
 		current_time += 5*delta
 	if current_time <= 0:
 		toggle_bullet_time(false)
@@ -66,9 +71,11 @@ func toggle_bullet_time(toggle):
 	if !toggle:
 		bullet_time_toggled = false
 		Engine.set_time_scale(1)
+		UI.get_node("Overlay").get_material().set_shader_param("aberration_amount",0)
 	else:
 		bullet_time_toggled = true
 		Engine.set_time_scale(0.1)	
+		UI.get_node("Overlay").get_material().set_shader_param("aberration_amount",2)
 
 func movement(delta):
 	var head_basis = $Head.get_global_transform().basis
@@ -113,7 +120,7 @@ func shoot():
 	var scene_root = get_parent()
 	scene_root.add_child(clone)
 	print("shoot")
-	clone.global_transform = $Head/Camera.global_transform
+	clone.global_transform = bullet_source.global_transform
 	clone.damage = 1
 	$ReloadTimer.start()
 	reloaded = false

@@ -34,6 +34,7 @@ func collided(body):
 		return
 	
 	if body.is_in_group("enemy"):
+		body.queue_free()
 		hit_something = true
 		print("hit ground")
 		queue_free()
