@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Controllers/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Effects/Bullet.tscn" type="PackedScene" id=2]
@@ -10,6 +10,10 @@
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 1, 0.332977, 1 )
+
+[sub_resource type="CylinderShape" id=4]
+radius = 1.87844
+height = 0.911018
 
 [node name="Player" type="KinematicBody" groups=[
 "Player",
@@ -50,6 +54,37 @@ shape = SubResource( 3 )
 
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="Wall_Jump_Range" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall_Jump_Range"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.587667, 0 )
+shape = SubResource( 4 )
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.399036, 0 )
+
+[node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0222964, -0.399036, 0 )
+enabled = true
+cast_to = Vector3( 5, 0, 0 )
+
+[node name="RayCast2" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0222964, -0.399036, 0 )
+enabled = true
+cast_to = Vector3( -5, 0, 0 )
+
+[node name="RayCast3" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0222964, -0.399036, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -5 )
+
+[node name="RayCast4" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0222964, -0.399036, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, 5 )
 [connection signal="body_entered" from="Feet" to="." method="_on_Feet_body_entered"]
 [connection signal="body_exited" from="Feet" to="." method="_on_Feet_body_exited"]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
+[connection signal="body_entered" from="Wall_Jump_Range" to="." method="_on_Wall_Jump_Range_body_entered"]
+[connection signal="body_exited" from="Wall_Jump_Range" to="." method="_on_Wall_Jump_Range_body_exited"]

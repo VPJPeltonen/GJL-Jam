@@ -4,7 +4,6 @@ export var speed = 15
 export var acceleration = 5
 export var gravity = 0.9
 export var jump_power = 60
-export var jumps = 2
 export var mouse_sens = 0.3
 
 export(Resource) var bullet
@@ -16,6 +15,8 @@ var inventory = []
 
 var frozen = false
 var on_ground = false
+var in_wall_range = false
+var wall_in_range
 var reloaded = true
 var move_state = "stand"
 
@@ -27,6 +28,7 @@ onready var UI = get_parent().get_node("UI")
 onready var bullet_source = get_node("Head/Camera/Position3D")
 onready var sun = get_parent().get_node("Enviroment/Lighting/Sun")
 onready var world = get_parent().get_node("Enviroment/Lighting/WorldEnvironment")
+onready var raycasts = [$RayCast,$RayCast2,$RayCast3,$RayCast4]
 
 func _input(event):
 	if frozen:
@@ -44,8 +46,9 @@ func _input(event):
 
 func _process(delta):
 	UI.update_time_meter(current_time)
-	sun.light_energy = current_time/max_time
-	world.environment.background_sky.sky_energy = current_time/max_time
+	sun.light_energy = (current_time/max_time)-0.2
+	world.environment.background_sky.sky_energy = (current_time/max_time)-0.2
+	world.environment.background_sky.sun_energy = (current_time/max_time)-0.2
 	if bullet_time_toggled:
 		current_time -= 100*delta
 	elif current_time < 100:
@@ -108,12 +111,25 @@ func movement(delta):
 	if Input.is_action_just_pressed("jump"):
 		if on_ground:
 			velocity.y += jump_power
-			jumps -= 1
-		elif jumps > 0:
-			velocity.y += jump_power
-			jumps -= 1
-	
+		elif in_wall_range:
+			wall_jump()
 	velocity = move_and_slide(velocity, Vector3.UP)
+	
+func wall_jump():
+	var dir = Vector3(0,0,0)
+	for ray in raycasts:
+		print("checking ray")
+		if ray.is_colliding() and ray.get_collider() != null:
+			var collider = ray.get_collider()
+			print("hit something")
+			if collider.is_in_group("wall"):
+				dir = global_transform.origin - ray.get_collision_point()
+				print("jumping")
+	velocity.y += jump_power
+	
+	dir = Vector3(dir.x,0,dir.z)
+	dir = dir.normalized()
+	velocity += jump_power * dir * 1
 	
 func shoot():
 	var clone = bullet.instance()
@@ -128,7 +144,6 @@ func shoot():
 func _on_Feet_body_entered(body):
 	if body.is_in_group("ground"):
 		on_ground = true
-		jumps = 2
 
 func _on_Feet_body_exited(body):
 	if body.is_in_group("ground"):
@@ -136,3 +151,12 @@ func _on_Feet_body_exited(body):
 		
 func _on_ReloadTimer_timeout():
 	reloaded = true
+
+func _on_Wall_Jump_Range_body_entered(body):
+	if body.is_in_group("wall"):
+		wall_in_range = body
+		in_wall_range = true
+
+func _on_Wall_Jump_Range_body_exited(body):
+	if body.is_in_group("wall"):
+		in_wall_range = false
