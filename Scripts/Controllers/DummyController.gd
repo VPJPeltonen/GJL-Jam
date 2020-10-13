@@ -9,6 +9,8 @@ var state = "default"
 var current_target
 var current_node = 0
 
+var health = 1
+
 var spot_range = 25.0
 var shoot_range = 100.0
 var reloaded = true
@@ -31,14 +33,28 @@ func _physics_process(delta):
 			move()
 		"shoot":
 			shoot()
-			look_at(Player.global_transform.origin,Vector3.UP)
+			var look_pos = Vector3(Player.global_transform.origin.x,global_transform.origin.y,Player.global_transform.origin.z)
+			look_at(look_pos,Vector3.UP)
+			#rotation_degrees = Vector3(rotation_degrees.x,rotation_degrees.y,0)
 			stay_in_range()
+
+func damage(damage):
+	health -= damage
+	if health <= 0:
+		queue_free()
 			
 func stay_in_range():
 	var distance = global_transform.origin.distance_to(Player.global_transform.origin) 
 	if distance > spot_range:
 		state = "default"
-
+	else:
+		var space_state = get_world().direct_space_state
+		var result = space_state.intersect_ray(global_transform.origin, Player.global_transform.origin, [self])
+		if result.collider == null:
+			return
+		if !result.collider.is_in_group("Player"):
+			state = "default"
+			
 func look_for_player():
 	var distance = global_transform.origin.distance_to(Player.global_transform.origin) 
 	if distance < spot_range:
@@ -55,7 +71,7 @@ func shoot():
 	scene_root.add_child(clone)
 	print("shoot")
 	clone.global_transform = bullet_source.global_transform
-	clone.damage = 1
+	clone.damage = 10
 	clone.speed = 100
 	$ReloadTimer.start()
 	reloaded = false
@@ -63,6 +79,7 @@ func shoot():
 
 func move():
 	if current_node < path.size():
+		
 		look_at(path[current_node],Vector3.UP)
 		var dir = (path[current_node] - global_transform.origin)
 		if dir.length() < 1:

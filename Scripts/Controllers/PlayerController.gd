@@ -70,6 +70,11 @@ func _physics_process(delta):
 			toggle_bullet_time(true)
 	movement(delta)
 
+func damage(damage):
+	current_time -= damage
+	#if health <= 0:
+		#queue_free()
+
 func toggle_bullet_time(toggle):
 	if !toggle:
 		bullet_time_toggled = false
