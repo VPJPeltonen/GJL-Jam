@@ -62,7 +62,7 @@ filter_enabled = true
 filters = [ "Armature/Skeleton:camera" ]
 
 [sub_resource type="AnimationNodeBlendTree" id=17]
-graph_offset = Vector2( 96.6, -348.51 )
+graph_offset = Vector2( 321.6, -285.76 )
 nodes/Animation/node = SubResource( 6 )
 nodes/Animation/position = Vector2( -20, -200 )
 "nodes/Animation 2/node" = SubResource( 1 )
@@ -76,21 +76,21 @@ nodes/Animation/position = Vector2( -20, -200 )
 "nodes/Animation 6/node" = SubResource( 5 )
 "nodes/Animation 6/position" = Vector2( 0, 200 )
 "nodes/INT -1=MoveBackwards 1=MoveForward 0=Still /node" = SubResource( 10 )
-"nodes/INT -1=MoveBackwards 1=MoveForward 0=Still /position" = Vector2( 240, -320 )
-"nodes/INT 0=CameraLook Forward 1=CameralookAround/node" = SubResource( 11 )
-"nodes/INT 0=CameraLook Forward 1=CameralookAround/position" = Vector2( 860, -200 )
+"nodes/INT -1=MoveBackwards 1=MoveForward 0=Still /position" = Vector2( 520, -200 )
+"nodes/INT 0=CameraFocusAim 1=CameralookAround/node" = SubResource( 11 )
+"nodes/INT 0=CameraFocusAim 1=CameralookAround/position" = Vector2( 960, -220 )
 "nodes/INT 0=Fans Off 1 = Fans On/node" = SubResource( 12 )
-"nodes/INT 0=Fans Off 1 = Fans On/position" = Vector2( 280, -200 )
+"nodes/INT 0=Fans Off 1 = Fans On/position" = Vector2( -60, -480 )
 "nodes/KEEP ON/node" = SubResource( 13 )
-"nodes/KEEP ON/position" = Vector2( 560, -200 )
+"nodes/KEEP ON/position" = Vector2( 240, -480 )
 "nodes/Trigger Alert Animation/node" = SubResource( 14 )
-"nodes/Trigger Alert Animation/position" = Vector2( 700, -20 )
+"nodes/Trigger Alert Animation/position" = Vector2( 860, 20 )
 "nodes/Trigger Hurt Animation/node" = SubResource( 15 )
-"nodes/Trigger Hurt Animation/position" = Vector2( 940, -20 )
+"nodes/Trigger Hurt Animation/position" = Vector2( 1140, 20 )
 "nodes/Trigger Shooting/node" = SubResource( 16 )
-"nodes/Trigger Shooting/position" = Vector2( 500, -20 )
-nodes/output/position = Vector2( 1200, -20 )
-node_connections = [ "output", 0, "Trigger Hurt Animation", "Trigger Hurt Animation", 0, "Trigger Alert Animation", "Trigger Hurt Animation", 1, "Animation 6", "INT 0=Fans Off 1 = Fans On", 0, "Animation 2", "INT 0=Fans Off 1 = Fans On", 1, "Animation", "Trigger Shooting", 0, "INT 0=CameraLook Forward 1=CameralookAround", "Trigger Shooting", 1, "Animation 5", "Trigger Alert Animation", 0, "Trigger Shooting", "Trigger Alert Animation", 1, "Animation 3", "INT 0=CameraLook Forward 1=CameralookAround", 0, "KEEP ON", "INT 0=CameraLook Forward 1=CameralookAround", 1, "Animation 4", "KEEP ON", 0, "INT 0=Fans Off 1 = Fans On", "KEEP ON", 1, "INT -1=MoveBackwards 1=MoveForward 0=Still " ]
+"nodes/Trigger Shooting/position" = Vector2( 580, 20 )
+nodes/output/position = Vector2( 1520, 20 )
+node_connections = [ "output", 0, "Trigger Hurt Animation", "Trigger Hurt Animation", 0, "Trigger Alert Animation", "Trigger Hurt Animation", 1, "Animation 6", "INT 0=Fans Off 1 = Fans On", 0, "Animation 2", "INT 0=Fans Off 1 = Fans On", 1, "Animation", "Trigger Shooting", 0, "INT 0=CameraFocusAim 1=CameralookAround", "Trigger Shooting", 1, "Animation 5", "Trigger Alert Animation", 0, "Trigger Shooting", "Trigger Alert Animation", 1, "Animation 3", "KEEP ON", 0, "INT 0=Fans Off 1 = Fans On", "KEEP ON", 1, "INT -1=MoveBackwards 1=MoveForward 0=Still ", "INT 0=CameraFocusAim 1=CameralookAround", 0, "KEEP ON", "INT 0=CameraFocusAim 1=CameralookAround", 1, "Animation 4" ]
 
 [node name="Drone" instance=ExtResource( 1 )]
 
@@ -99,7 +99,7 @@ tree_root = SubResource( 17 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 "parameters/INT -1=MoveBackwards 1=MoveForward 0=Still /blend_position" = 0.0
-"parameters/INT 0=CameraLook Forward 1=CameralookAround/blend_amount" = 1.0
+"parameters/INT 0=CameraFocusAim 1=CameralookAround/blend_amount" = 1.0
 "parameters/INT 0=Fans Off 1 = Fans On/blend_amount" = 1.0
 "parameters/KEEP ON/blend_amount" = 1.0
 "parameters/Trigger Alert Animation/active" = false
