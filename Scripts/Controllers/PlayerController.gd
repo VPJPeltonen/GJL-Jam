@@ -7,11 +7,13 @@ export var jump_power = 60
 export var mouse_sens = 0.3
 
 export(Resource) var bullet
+export(Resource) var missile
 
 var velocity = Vector3()
 var camera_x_rotation = 0
 
-var inventory = []
+var inventory = ["pistol","rocket launcher"]
+var current_weapon = 0
 
 var frozen = false
 var on_ground = false
@@ -45,6 +47,7 @@ func _input(event):
 			camera_x_rotation += x_delta
 
 func _process(delta):
+	change_weapon()
 	UI.update_time_meter(current_time)
 	sun.light_energy = (current_time/max_time)-0.2
 	world.environment.background_sky.sky_energy = (current_time/max_time)-0.2
@@ -68,6 +71,17 @@ func _physics_process(delta):
 	else:
 		toggle_bullet_time(false)
 	movement(delta)
+
+func change_weapon():
+	if Input.is_action_just_pressed("weapon1"):
+		current_weapon = 0
+		$Head/Camera/revolver.show()
+		$Head/Camera/missile.hide()
+	if Input.is_action_just_pressed("weapon2"):
+		current_weapon = 1
+		$Head/Camera/revolver.hide()
+		$Head/Camera/missile.show()
+		
 
 func damage(damage):
 	current_time -= damage
@@ -136,14 +150,26 @@ func wall_jump():
 	velocity += jump_power * dir * 1
 	
 func shoot():
-	var clone = bullet.instance()
-	var scene_root = get_parent()
-	scene_root.add_child(clone)
-	print("shoot")
-	clone.global_transform = bullet_source.global_transform
-	clone.damage = 1
-	$ReloadTimer.start()
-	reloaded = false
+	match current_weapon:
+		0:
+			var clone = bullet.instance()
+			var scene_root = get_parent()
+			scene_root.add_child(clone)
+			print("shoot")
+			clone.global_transform = bullet_source.global_transform
+			clone.damage = 1
+			$ReloadTimer.start()
+			reloaded = false
+		1:
+			var clone = missile.instance()
+			var scene_root = get_parent()
+			scene_root.add_child(clone)
+			print("shoot")
+			clone.global_transform = bullet_source.global_transform
+			clone.damage = 1
+			$ReloadTimer.start()
+			reloaded = false
+
 
 func _on_Feet_body_entered(body):
 	if body.is_in_group("ground"):

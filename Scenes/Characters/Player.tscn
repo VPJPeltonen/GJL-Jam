@@ -1,17 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Controllers/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Effects/Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Guns/Revolver.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Effects/Missile.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleMesh" id=1]
 
 [sub_resource type="CapsuleShape" id=2]
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="CylinderMesh" id=3]
+
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 1, 0.332977, 1 )
 
-[sub_resource type="CylinderShape" id=4]
+[sub_resource type="CylinderShape" id=5]
 radius = 1.87844
 height = 0.911018
 
@@ -21,6 +24,7 @@ height = 0.911018
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0434, 0 )
 script = ExtResource( 1 )
 bullet = ExtResource( 2 )
+missile = ExtResource( 4 )
 
 [node name="BodyMesh" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -46,12 +50,18 @@ transform = Transform( -0.1, 0, -3.89414e-08, 0, 0.1, 0, 3.89414e-08, 0, -0.1, 0
 [node name="Position3D" type="Position3D" parent="Head/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.63751 )
 
+[node name="missile" type="MeshInstance" parent="Head/Camera"]
+transform = Transform( 0.1, 0, 0, 0, -2.18557e-08, -0.1, 0, 0.5, -4.37114e-09, 0.21112, -0.280761, -0.429655 )
+visible = false
+mesh = SubResource( 3 )
+material/0 = null
+
 [node name="Feet" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.29082, 0 )
 input_ray_pickable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Feet"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -61,7 +71,7 @@ input_ray_pickable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Wall_Jump_Range"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.587667, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Spatial" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.399036, 0 )
