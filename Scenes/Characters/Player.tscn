@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Controllers/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Effects/Bullet.tscn" type="PackedScene" id=2]
@@ -11,10 +11,12 @@
 
 [sub_resource type="CylinderMesh" id=3]
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="CylinderMesh" id=4]
+
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 1, 0.332977, 1 )
 
-[sub_resource type="CylinderShape" id=5]
+[sub_resource type="CylinderShape" id=6]
 radius = 1.87844
 height = 0.911018
 
@@ -57,12 +59,43 @@ visible = false
 mesh = SubResource( 3 )
 material/0 = null
 
+[node name="Shotgun" type="Spatial" parent="Head/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0877237 )
+visible = false
+
+[node name="Mesh" type="MeshInstance" parent="Head/Camera/Shotgun"]
+transform = Transform( 0.05, 0, 0, 0, -1.31134e-08, -0.05, 0, 0.3, -2.18557e-09, 0.0714855, -0.144274, -0.347721 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Mesh2" type="MeshInstance" parent="Head/Camera/Shotgun"]
+transform = Transform( 0.05, 0, 0, 0, -1.31134e-08, -0.05, 0, 0.3, -2.18557e-09, 0.148928, -0.144274, -0.347721 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="shots" type="Spatial" parent="Head/Camera/Shotgun"]
+
+[node name="Position3D2" type="Position3D" parent="Head/Camera/Shotgun/shots"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.72523 )
+
+[node name="Position3D1" type="Position3D" parent="Head/Camera/Shotgun/shots"]
+transform = Transform( 1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 0, 0, -1.72523 )
+
+[node name="Position3D3" type="Position3D" parent="Head/Camera/Shotgun/shots"]
+transform = Transform( 0.999848, 0, -0.0174524, 0, 1, 0, 0.0174524, 0, 0.999848, 0, 0, -1.72523 )
+
+[node name="Position3D4" type="Position3D" parent="Head/Camera/Shotgun/shots"]
+transform = Transform( 0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, 0, 0, -1.72523 )
+
+[node name="Position3D5" type="Position3D" parent="Head/Camera/Shotgun/shots"]
+transform = Transform( 1, 0, 0, 0, 0.999848, 0.0174524, 0, -0.0174524, 0.999848, 0, 0, -1.72523 )
+
 [node name="Feet" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.29082, 0 )
 input_ray_pickable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Feet"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -72,7 +105,7 @@ input_ray_pickable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Wall_Jump_Range"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.587667, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Spatial" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.399036, 0 )

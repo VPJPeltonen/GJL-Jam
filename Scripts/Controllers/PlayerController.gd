@@ -1,8 +1,8 @@
 extends KinematicBody
 
-export var speed = 15
+export var speed = 25
 export var acceleration = 5
-export var gravity = 0.9
+export var gravity = 1.22
 export var jump_power = 60
 export var mouse_sens = 0.3
 
@@ -12,7 +12,7 @@ export(Resource) var missile
 var velocity = Vector3()
 var camera_x_rotation = 0
 
-var inventory = ["pistol","rocket launcher"]
+var inventory = ["pistol","rocket launcher","shotgun"]
 var current_weapon = 0
 
 var frozen = false
@@ -31,6 +31,7 @@ onready var bullet_source = get_node("Head/Camera/Position3D")
 onready var sun = get_parent().get_node("Enviroment/Lighting/Sun")
 onready var world = get_parent().get_node("Enviroment/Lighting/WorldEnvironment")
 onready var raycasts = [$RayCast,$RayCast2,$RayCast3,$RayCast4]
+onready var shotgun_shots = $Head/Camera/Shotgun/shots.get_children()
 
 func _input(event):
 	if frozen:
@@ -45,6 +46,18 @@ func _input(event):
 		if camera_x_rotation + x_delta > -90 and camera_x_rotation + x_delta < 90: 
 			$Head/Camera.rotate_x(deg2rad(-x_delta))
 			camera_x_rotation += x_delta
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			if event.button_index == BUTTON_WHEEL_UP:
+				current_weapon += 1
+				if current_weapon >= inventory.size():
+					current_weapon = 0
+				switch_weapon(current_weapon)
+			if event.button_index == BUTTON_WHEEL_DOWN:
+				current_weapon -= 1
+				if current_weapon < 0:
+					current_weapon = inventory.size()
+				switch_weapon(current_weapon)
 
 func _process(delta):
 	change_weapon()
@@ -75,13 +88,29 @@ func _physics_process(delta):
 func change_weapon():
 	if Input.is_action_just_pressed("weapon1"):
 		current_weapon = 0
-		$Head/Camera/revolver.show()
-		$Head/Camera/missile.hide()
+		switch_weapon(current_weapon)
 	if Input.is_action_just_pressed("weapon2"):
 		current_weapon = 1
-		$Head/Camera/revolver.hide()
-		$Head/Camera/missile.show()
+		switch_weapon(current_weapon)
+	if Input.is_action_just_pressed("weapon3"):
+		current_weapon = 2
+		switch_weapon(current_weapon)
 		
+func switch_weapon(num):
+	var weapon = inventory[num]
+	match weapon:
+		"pistol":
+			$Head/Camera/revolver.show()
+			$Head/Camera/missile.hide()
+			$Head/Camera/Shotgun.hide()
+		"rocket launcher":
+			$Head/Camera/revolver.hide()
+			$Head/Camera/missile.show()
+			$Head/Camera/Shotgun.hide()
+		"shotgun":
+			$Head/Camera/revolver.hide()
+			$Head/Camera/missile.hide()
+			$Head/Camera/Shotgun.show()
 
 func damage(damage):
 	current_time -= damage
@@ -150,8 +179,9 @@ func wall_jump():
 	velocity += jump_power * dir * 1
 	
 func shoot():
-	match current_weapon:
-		0:
+	var weapon = inventory[current_weapon]
+	match weapon:
+		"pistol":
 			var clone = bullet.instance()
 			var scene_root = get_parent()
 			scene_root.add_child(clone)
@@ -160,7 +190,7 @@ func shoot():
 			clone.damage = 1
 			$ReloadTimer.start()
 			reloaded = false
-		1:
+		"rocket launcher":
 			var clone = missile.instance()
 			var scene_root = get_parent()
 			scene_root.add_child(clone)
@@ -169,7 +199,18 @@ func shoot():
 			clone.damage = 1
 			$ReloadTimer.start()
 			reloaded = false
-
+		"shotgun":
+			for shot in shotgun_shots:
+				var clone = bullet.instance()
+				var scene_root = get_parent()
+				scene_root.add_child(clone)
+				print("shoot")
+				clone.global_transform = shot.global_transform
+				clone.damage = 1
+				clone.speed = 50
+				clone.life_time = 0.5
+				$ReloadTimer.start()
+				reloaded = false
 
 func _on_Feet_body_entered(body):
 	if body.is_in_group("ground"):
