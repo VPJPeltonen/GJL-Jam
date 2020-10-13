@@ -48,6 +48,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.737716 )
 
 [node name="Feet" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.29082, 0 )
+input_ray_pickable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Feet"]
 shape = SubResource( 3 )
@@ -56,6 +57,7 @@ shape = SubResource( 3 )
 wait_time = 0.2
 
 [node name="Wall_Jump_Range" type="Area" parent="."]
+input_ray_pickable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Wall_Jump_Range"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.587667, 0 )

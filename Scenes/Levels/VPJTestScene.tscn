@@ -80,6 +80,10 @@ transform = Transform( -0.953265, 0.180569, -0.242243, 0.0151596, 0.82934, 0.558
 light_color = Color( 1, 0.929412, 0.835294, 1 )
 light_energy = 0.8
 shadow_enabled = true
+directional_shadow_split_1 = 0.132
+directional_shadow_split_2 = 0.297
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 82.4
 
 [node name="GIProbe" type="GIProbe" parent="Enviroment/Lighting"]
 visible = false
