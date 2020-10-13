@@ -30,9 +30,16 @@ func _physics_process(delta):
 	match state:
 		"default":
 			look_for_player()
+			#$AnimationPlayer/AnimationTree.tree_root.set_parameter("parameters/Running/blend_position",1)
+			#$AnimationPlayer/AnimationTree.tree_root.parameters/Running/blend_position = 1
+			#$AnimationPlayer/AnimationTree.tree_root.set_parameter("Jogging",1)
+			$AnimationPlayer.play("Jog")
 			move()
 		"shoot":
 			shoot()
+			#$AnimationPlayer/AnimationTree.tree_root.set_parameter("parameters/Running/blend_position",0)
+			#$AnimationPlayer/AnimationTree.tree_root.set_parameter("Jogging",0)
+			$AnimationPlayer.play("Shooting TOP HALF")
 			var look_pos = Vector3(Player.global_transform.origin.x,global_transform.origin.y,Player.global_transform.origin.z)
 			look_at(look_pos,Vector3.UP)
 			#rotation_degrees = Vector3(rotation_degrees.x,rotation_degrees.y,0)
@@ -46,6 +53,7 @@ func damage(damage):
 func stay_in_range():
 	var distance = global_transform.origin.distance_to(Player.global_transform.origin) 
 	if distance > spot_range:
+		move_to(Player.global_transform.origin)
 		state = "default"
 	else:
 		var space_state = get_world().direct_space_state
@@ -53,6 +61,7 @@ func stay_in_range():
 		if !result.has("collider"):
 			return
 		if !result.collider.is_in_group("Player"):
+			move_to(Player.global_transform.origin)
 			state = "default"
 			
 func look_for_player():
@@ -90,7 +99,6 @@ func move():
 			
 	else:
 		move_to(walk_point[rng.randi_range(0,3)].global_transform.origin)
-
 		
 func init(worker_model):
 	model = worker_model
@@ -99,7 +107,6 @@ func init(worker_model):
 func move_to(target):
 	path = nav.get_simple_path(global_transform.origin, target)
 	current_node = 0
-
 
 func _on_ReloadTimer_timeout():
 	reloaded = true
