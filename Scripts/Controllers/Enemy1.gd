@@ -48,8 +48,13 @@ func _physics_process(delta):
 func damage(damage):
 	health -= damage
 	if health <= 0:
+		state = "dead"
+		#$AnimationPlayer/AnimationTree.active = false
+		#$AnimationPlayer.stop()
+		#$AnimationPlayer.queue_free()
+		#$EnemyArmiture001/Skeleton.physical_bones_start_simulation()
 		queue_free()
-			
+
 func stay_in_range():
 	var distance = global_transform.origin.distance_to(Player.global_transform.origin) 
 	if distance > spot_range:
