@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Controllers/Spawner.gd" type="Script" id=1]
+[ext_resource path="res://Imports/Enemy1/Enemy1.tscn" type="PackedScene" id=2]
+
+[node name="Spawner" type="Spatial"]
+script = ExtResource( 1 )
+enemy1 = ExtResource( 2 )
+
+[node name="SpawnPoint" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.7569, 0, -39.7606 )

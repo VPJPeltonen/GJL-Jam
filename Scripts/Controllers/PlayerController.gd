@@ -71,14 +71,15 @@ func _process(delta):
 		current_time += 5*delta
 	if current_time <= 0:
 		toggle_bullet_time(false)
-
+	if Input.is_action_just_pressed("shoot") and reloaded:	
+		shoot()
+		
 func _physics_process(delta):
 	move_state = "stand"
 	if frozen:
 		return
 	var space_state = get_world().direct_space_state
-	if Input.is_action_just_pressed("shoot") and reloaded:	
-		shoot()
+
 	if Input.is_action_pressed("toggle_bullet_time") and current_time > 0:
 		toggle_bullet_time(true)
 	else:
