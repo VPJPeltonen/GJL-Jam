@@ -1,7 +1,8 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Imports/Drone/Material_001.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Controllers/Drone.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Effects/Bullet.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "DroneBody"
@@ -363,6 +364,7 @@ tracks/12/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.333333, 1,
 [sub_resource type="Animation" id=7]
 resource_name = "FanSpin"
 length = 0.5
+loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:camera")
 tracks/0/interp = 1
@@ -744,6 +746,7 @@ tracks/12/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.333333, 1,
 [sub_resource type="Animation" id=11]
 resource_name = "look around CAMERA"
 length = 4.16667
+loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:camera")
 tracks/0/interp = 1
@@ -991,7 +994,7 @@ filter_enabled = true
 filters = [ "Armature/Skeleton:camera" ]
 
 [sub_resource type="AnimationNodeBlendTree" id=29]
-graph_offset = Vector2( 321.6, -285.76 )
+graph_offset = Vector2( 82.6, -134.76 )
 nodes/Animation/node = SubResource( 18 )
 nodes/Animation/position = Vector2( -20, -200 )
 "nodes/Animation 2/node" = SubResource( 13 )
@@ -1025,11 +1028,16 @@ node_connections = [ "output", 0, "Trigger Hurt Animation", "KEEP ON", 0, "INT 0
 radius = 1.21257
 height = 0.932777
 
+[sub_resource type="CapsuleShape" id=31]
+radius = 0.552905
+height = 0.510106
+
 [node name="Drone" type="KinematicBody" groups=[
 "enemy",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5414, 0 )
 script = ExtResource( 2 )
+bullet = ExtResource( 3 )
 
 [node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true
@@ -1144,11 +1152,15 @@ active = true
 "parameters/Trigger Shooting/active" = false
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( -0.979251, 0, -0.20265, 0, 1, 0, 0.20265, 0, -0.979251, -0.0434082, 0.656059, 0.105735 )
+transform = Transform( -0.979251, 0, -0.20265, 0, 1, 0, 0.20265, 0, -0.979251, -0.0434082, 0.59031, 0.105735 )
 shape = SubResource( 30 )
 
 [node name="RayCast" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00691187, 0, 0 )
 enabled = true
 cast_to = Vector3( 0, -3, 0 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.223625, 0 )
+shape = SubResource( 31 )
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
