@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Effects/Missile.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Effects/Explosion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Effects/Trail.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CylinderMesh" id=1]
 
@@ -35,3 +36,6 @@ material/0 = SubResource( 3 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.1, 0, 0, 0, -1.62921e-08, -0.1, 0, 0.1, -1.62921e-08, 0.022016, 0, -0.71303 )
 shape = SubResource( 4 )
+
+[node name="Particles" parent="." instance=ExtResource( 3 )]
+transform = Transform( -0.999997, -0.00239098, 1.21019e-05, 0, -0.00506141, -0.999987, 0.00239101, -0.999984, 0.0050614, 0.00945559, 0.0274452, 0.27123 )

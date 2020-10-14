@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="ParticlesMaterial" id=6]
+gravity = Vector3( 0, 0, 0 )
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_transparent = true
+albedo_color = Color( 0.470588, 0.470588, 0.470588, 0.196078 )
+
+[sub_resource type="CylinderMesh" id=8]
+material = SubResource( 7 )
+top_radius = 0.01
+bottom_radius = 0.05
+height = 1.029
+
+[node name="Particles" type="Particles"]
+transform = Transform( -0.999997, -0.00239098, 1.21019e-05, 0, -0.00506141, -0.999987, 0.00239101, -0.999984, 0.0050614, 0.00945559, 0.0274452, 0.553364 )
+amount = 20
+lifetime = 0.2
+local_coords = false
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 8 )
