@@ -9,7 +9,7 @@ var state = "default"
 var current_target
 var current_node = 0
 
-var health = 1
+var health = 3
 
 var spot_range = 25.0
 var shoot_range = 100.0
@@ -22,7 +22,8 @@ onready var nav = get_parent()
 onready var walk_point = [get_parent().get_node("Position3D"),get_parent().get_node("Position3D2"),get_parent().get_node("Position3D3"),get_parent().get_node("Position3D4")]
 onready var Player = get_tree().get_nodes_in_group("Player")[0]
 onready var bullet_source = $BulletSource
-	
+onready var animation_tree = $AnimationPlayer/AnimationTree
+
 func _ready():
 	rng.randomize()
 	
@@ -30,28 +31,22 @@ func _physics_process(delta):
 	match state:
 		"default":
 			look_for_player()
-			#$AnimationPlayer/AnimationTree.tree_root.set_parameter("parameters/Running/blend_position",1)
-			#$AnimationPlayer/AnimationTree.tree_root.parameters/Running/blend_position = 1
-			#$AnimationPlayer/AnimationTree.tree_root.set_parameter("Jogging",1)
-			$AnimationPlayer.play("Jog")
+			animation_tree.set("parameters/Running/blend_position",1)
+			animation_tree.set("parameters/toggle SHOOTING/active",false)
 			move()
 		"shoot":
 			shoot()
-			#$AnimationPlayer/AnimationTree.tree_root.set_parameter("parameters/Running/blend_position",0)
-			#$AnimationPlayer/AnimationTree.tree_root.set_parameter("Jogging",0)
-			$AnimationPlayer.play("Shooting TOP HALF")
 			var look_pos = Vector3(Player.global_transform.origin.x,global_transform.origin.y,Player.global_transform.origin.z)
 			look_at(look_pos,Vector3.UP)
-			#rotation_degrees = Vector3(rotation_degrees.x,rotation_degrees.y,0)
+			animation_tree.set("parameters/Running/blend_position",0)
+			animation_tree.set("parameters/toggle SHOOTING/active",true)
 			stay_in_range()
 
 func damage(damage):
 	health -= damage
+	animation_tree.set("parameters/toggle Hurt Animation/active",true)
 	if health <= 0:
 		state = "dead"
-		#$AnimationPlayer/AnimationTree.active = false
-		#$AnimationPlayer.stop()
-		#$AnimationPlayer.queue_free()
 		#$EnemyArmiture001/Skeleton.physical_bones_start_simulation()
 		queue_free()
 

@@ -56,7 +56,7 @@ func _input(event):
 			if event.button_index == BUTTON_WHEEL_DOWN:
 				current_weapon -= 1
 				if current_weapon < 0:
-					current_weapon = inventory.size()
+					current_weapon = inventory.size()-1
 				switch_weapon(current_weapon)
 
 func _process(delta):
