@@ -1,17 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Controllers/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Effects/Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Guns/Revolver.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Effects/Missile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/Effects/Guns.gd" type="Script" id=5]
 
 [sub_resource type="CapsuleMesh" id=1]
 
 [sub_resource type="CapsuleShape" id=2]
-
-[sub_resource type="CylinderMesh" id=3]
-
-[sub_resource type="CylinderMesh" id=4]
 
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 1, 0.332977, 1 )
@@ -19,6 +16,10 @@ extents = Vector3( 1, 0.332977, 1 )
 [sub_resource type="CylinderShape" id=6]
 radius = 1.87844
 height = 0.911018
+
+[sub_resource type="CylinderMesh" id=3]
+
+[sub_resource type="CylinderMesh" id=4]
 
 [node name="Player" type="KinematicBody" groups=[
 "Player",
@@ -47,48 +48,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.480933 )
 fov = 90.0
 far = 200.0
 
-[node name="revolver" parent="Head/Camera" instance=ExtResource( 3 )]
-transform = Transform( -0.1, 0, -3.89414e-08, 0, 0.1, 0, 3.89414e-08, 0, -0.1, 0.2, -0.3, -0.2 )
-
 [node name="Position3D" type="Position3D" parent="Head/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.145024, -0.204057, -1.61806 )
 
-[node name="missile" type="MeshInstance" parent="Head/Camera"]
-transform = Transform( 0.1, 0, 0, 0, -2.18557e-08, -0.1, 0, 0.5, -4.37114e-09, 0.21112, -0.280761, -0.429655 )
-visible = false
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="Shotgun" type="Spatial" parent="Head/Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0877237 )
-visible = false
-
-[node name="Mesh" type="MeshInstance" parent="Head/Camera/Shotgun"]
-transform = Transform( 0.05, 0, 0, 0, -1.31134e-08, -0.05, 0, 0.3, -2.18557e-09, 0.0714855, -0.144274, -0.347721 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="Mesh2" type="MeshInstance" parent="Head/Camera/Shotgun"]
-transform = Transform( 0.05, 0, 0, 0, -1.31134e-08, -0.05, 0, 0.3, -2.18557e-09, 0.148928, -0.144274, -0.347721 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="shots" type="Spatial" parent="Head/Camera/Shotgun"]
-
-[node name="Position3D2" type="Position3D" parent="Head/Camera/Shotgun/shots"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.72523 )
-
-[node name="Position3D1" type="Position3D" parent="Head/Camera/Shotgun/shots"]
-transform = Transform( 1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 0, 0, -1.72523 )
-
-[node name="Position3D3" type="Position3D" parent="Head/Camera/Shotgun/shots"]
-transform = Transform( 0.999848, 0, -0.0174524, 0, 1, 0, 0.0174524, 0, 0.999848, 0, 0, -1.72523 )
-
-[node name="Position3D4" type="Position3D" parent="Head/Camera/Shotgun/shots"]
-transform = Transform( 0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, 0, 0, -1.72523 )
-
-[node name="Position3D5" type="Position3D" parent="Head/Camera/Shotgun/shots"]
-transform = Transform( 1, 0, 0, 0, 0.999848, 0.0174524, 0, -0.0174524, 0.999848, 0, 0, -1.72523 )
+[node name="GunTargetPos" type="Position3D" parent="Head/Camera"]
 
 [node name="Feet" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.29082, 0 )
@@ -129,6 +92,50 @@ cast_to = Vector3( 0, 0, -5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0222964, -0.399036, 0 )
 enabled = true
 cast_to = Vector3( 0, 0, 5 )
+
+[node name="Guns" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24561, 0.025395 )
+script = ExtResource( 5 )
+
+[node name="revolver" parent="Guns" instance=ExtResource( 3 )]
+transform = Transform( -0.1, 0, -3.89414e-08, 0, 0.1, 0, 3.89414e-08, 0, -0.1, 0.2, -0.3, -0.2 )
+
+[node name="missile" type="MeshInstance" parent="Guns"]
+transform = Transform( 0.1, 0, 0, 0, -2.18557e-08, -0.1, 0, 0.5, -4.37114e-09, 0.21112, -0.280761, -0.429655 )
+visible = false
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Shotgun" type="Spatial" parent="Guns"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0877237 )
+visible = false
+
+[node name="Mesh" type="MeshInstance" parent="Guns/Shotgun"]
+transform = Transform( 0.05, 0, 0, 0, -1.31134e-08, -0.05, 0, 0.3, -2.18557e-09, 0.0714855, -0.144274, -0.347721 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Mesh2" type="MeshInstance" parent="Guns/Shotgun"]
+transform = Transform( 0.05, 0, 0, 0, -1.31134e-08, -0.05, 0, 0.3, -2.18557e-09, 0.148928, -0.144274, -0.347721 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="shots" type="Spatial" parent="Guns/Shotgun"]
+
+[node name="Position3D2" type="Position3D" parent="Guns/Shotgun/shots"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.72523 )
+
+[node name="Position3D1" type="Position3D" parent="Guns/Shotgun/shots"]
+transform = Transform( 1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 0, 0, -1.72523 )
+
+[node name="Position3D3" type="Position3D" parent="Guns/Shotgun/shots"]
+transform = Transform( 0.999848, 0, -0.0174524, 0, 1, 0, 0.0174524, 0, 0.999848, 0, 0, -1.72523 )
+
+[node name="Position3D4" type="Position3D" parent="Guns/Shotgun/shots"]
+transform = Transform( 0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, 0, 0, -1.72523 )
+
+[node name="Position3D5" type="Position3D" parent="Guns/Shotgun/shots"]
+transform = Transform( 1, 0, 0, 0, 0.999848, 0.0174524, 0, -0.0174524, 0.999848, 0, 0, -1.72523 )
 [connection signal="body_entered" from="Feet" to="." method="_on_Feet_body_entered"]
 [connection signal="body_exited" from="Feet" to="." method="_on_Feet_body_exited"]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
