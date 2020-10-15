@@ -34,6 +34,7 @@ onready var sun = get_parent().get_node("Enviroment/Lighting/Sun")
 onready var world = get_parent().get_node("Enviroment/Lighting/WorldEnvironment")
 onready var raycasts = [$RayCast,$RayCast2,$RayCast3,$RayCast4]
 onready var shotgun_shots = $Guns/Shotgun/shots.get_children()
+onready var animation_tree = $Guns/Guns/AnimationPlayer/AnimationTree
 
 func _input(event):
 	if frozen:
@@ -54,12 +55,12 @@ func _input(event):
 				current_weapon += 1
 				if current_weapon >= inventory.size():
 					current_weapon = 0
-				switch_weapon(current_weapon)
+				switch_weapon()
 			if event.button_index == BUTTON_WHEEL_DOWN:
 				current_weapon -= 1
 				if current_weapon < 0:
 					current_weapon = inventory.size()-1
-				switch_weapon(current_weapon)
+				switch_weapon()
 
 func _process(delta):
 	change_weapon()
@@ -91,29 +92,17 @@ func _physics_process(delta):
 func change_weapon():
 	if Input.is_action_just_pressed("weapon1"):
 		current_weapon = 0
-		switch_weapon(current_weapon)
+		switch_weapon()
 	if Input.is_action_just_pressed("weapon2"):
 		current_weapon = 1
-		switch_weapon(current_weapon)
+		switch_weapon()
 	if Input.is_action_just_pressed("weapon3"):
 		current_weapon = 2
-		switch_weapon(current_weapon)
+		switch_weapon()
 		
-func switch_weapon(num):
-	var weapon = inventory[num]
-	match weapon:
-		"pistol":
-			$Guns/revolver.show()
-			$Guns/missile.hide()
-			$Guns/Shotgun.hide()
-		"rocket launcher":
-			$Guns/revolver.hide()
-			$Guns/missile.show()
-			$Guns/Shotgun.hide()
-		"shotgun":
-			$Guns/revolver.hide()
-			$Guns/missile.hide()
-			$Guns/Shotgun.show()
+func switch_weapon():
+	animation_tree.set("parameters/SwitchGun/active",true)
+	$SwitchTimer.start()
 
 func damage(damage):
 	current_time -= damage
@@ -186,8 +175,10 @@ func wall_jump():
 	velocity += jump_power * dir * 1
 	
 func shoot():
+	animation_tree.set("parameters/Shoot/active",true)
 	var weapon = inventory[current_weapon]
 	var scene_root = get_parent()
+	
 	match weapon:
 		"pistol":
 			var clone = bullet.instance()
@@ -245,3 +236,19 @@ func _on_MissileReloadTimer_timeout():
 
 func _on_ShotgunReloadTimer_timeout():
 	reloads[inventory.find("shotgun")] = true
+
+func _on_SwitchTimer_timeout():
+	var weapon = inventory[current_weapon]
+	match weapon:
+		"pistol":
+			$"Guns/Guns/Gun/Skeleton/ugly handgun001".show()
+			$"Guns/Guns/Gun/Skeleton/Launcher001".hide()
+			$Guns/Guns/Gun/Skeleton/Shotgun001.hide()
+		"rocket launcher":
+			$"Guns/Guns/Gun/Skeleton/ugly handgun001".hide()
+			$"Guns/Guns/Gun/Skeleton/Launcher001".show()
+			$Guns/Guns/Gun/Skeleton/Shotgun001.hide()
+		"shotgun":
+			$"Guns/Guns/Gun/Skeleton/ugly handgun001".hide()
+			$"Guns/Guns/Gun/Skeleton/Launcher001".hide()
+			$Guns/Guns/Gun/Skeleton/Shotgun001.show()
