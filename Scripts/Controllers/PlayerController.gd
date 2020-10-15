@@ -181,6 +181,7 @@ func shoot():
 	
 	match weapon:
 		"pistol":
+			animation_tree.set("parameters/GunPower/blend_position",0)
 			var clone = bullet.instance()
 			scene_root.add_child(clone)
 			clone.global_transform = bullet_source.global_transform
@@ -189,6 +190,7 @@ func shoot():
 			$Reloads/PistolReloadTimer.start()
 			reloads[inventory.find("pistol")] = false
 		"rocket launcher":
+			animation_tree.set("parameters/GunPower/blend_position",1)
 			var clone = missile.instance()
 			scene_root.add_child(clone)
 			clone.global_transform = bullet_source.global_transform
@@ -197,6 +199,7 @@ func shoot():
 			$Reloads/MissileReloadTimer.start()
 			reloads[inventory.find("rocket launcher")] = false
 		"shotgun":
+			animation_tree.set("parameters/GunPower/blend_position",0.5)
 			for shot in shotgun_shots:
 				var clone = bullet.instance()
 				scene_root.add_child(clone)
