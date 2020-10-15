@@ -11,6 +11,7 @@ func _process(delta):
 	size += grow_speed*delta*4
 	$MeshInstance.scale = size
 	$CollisionShape.scale = size
+	$OmniLight.omni_range += 10*delta
 
 func _on_Timer_timeout():
 	queue_free()

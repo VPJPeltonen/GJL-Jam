@@ -5,6 +5,7 @@ export var acceleration = 5
 export var gravity = 1.22
 export var jump_power = 60
 export var mouse_sens = 0.3
+export var bullet_time_cheat = 200
 
 export(Resource) var bullet
 export(Resource) var missile
@@ -123,10 +124,12 @@ func toggle_bullet_time(toggle):
 		bullet_time_toggled = false
 		Engine.set_time_scale(1)
 		UI.get_node("Overlay").get_material().set_shader_param("aberration_amount",0)
+		Game.bullet_time = false
 	else:
 		bullet_time_toggled = true
 		Engine.set_time_scale(0.1)	
 		UI.get_node("Overlay").get_material().set_shader_param("aberration_amount",2)
+		Game.bullet_time = true
 
 func movement(delta):
 	var head_basis = $Head.get_global_transform().basis
@@ -151,8 +154,10 @@ func movement(delta):
 		move_state = "moving"
 	
 	direction = direction.normalized()
-	
-	velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
+	if Game.bullet_time:
+		velocity = velocity.linear_interpolate(direction * speed, acceleration * delta * bullet_time_cheat)
+	else:
+		velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
 	if not on_ground:
 		velocity.y -= gravity
 	
