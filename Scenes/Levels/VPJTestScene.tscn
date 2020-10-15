@@ -122,7 +122,7 @@ enemy1 = ExtResource( 8 )
 drone = ExtResource( 9 )
 
 [node name="SpawnPoint" type="Position3D" parent="Enviroment/Navigation/Spawner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.7569, 0, -39.7606 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2219, 0, -39.7606 )
 
 [node name="SpawnPoint2" type="Position3D" parent="Enviroment/Navigation/Spawner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40.7236, 0, -39.7606 )
