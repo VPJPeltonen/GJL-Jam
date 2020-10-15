@@ -157,6 +157,8 @@ func movement(delta):
 		elif in_wall_range:
 			wall_jump()
 	velocity = move_and_slide(velocity, Vector3.UP)
+	var veloc = velocity.normalized()
+	animation_tree.set("parameters/BlendSpace2D/blend_position",Vector2(veloc.x,veloc.y))
 	
 func wall_jump():
 	var dir = Vector3(0,0,0)
