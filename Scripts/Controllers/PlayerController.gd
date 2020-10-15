@@ -14,6 +14,7 @@ var velocity = Vector3()
 var camera_x_rotation = 0
 
 var inventory = ["pistol","rocket launcher","shotgun"]
+var reloads = [true,true,true]
 var current_weapon = 0
 
 var frozen = false
@@ -72,7 +73,7 @@ func _process(delta):
 		current_time += 5*delta
 	if current_time <= 0:
 		toggle_bullet_time(false)
-	if Input.is_action_just_pressed("shoot") and reloaded:	
+	if Input.is_action_just_pressed("shoot") and reloads[current_weapon]:#reloaded:	
 		shoot()
 		
 func _physics_process(delta):
@@ -186,37 +187,35 @@ func wall_jump():
 	
 func shoot():
 	var weapon = inventory[current_weapon]
+	var scene_root = get_parent()
 	match weapon:
 		"pistol":
 			var clone = bullet.instance()
-			var scene_root = get_parent()
 			scene_root.add_child(clone)
-			print("shoot")
 			clone.global_transform = bullet_source.global_transform
 			clone.damage = 1
-			$ReloadTimer.start()
-			reloaded = false
+			clone.shooter = self
+			$Reloads/PistolReloadTimer.start()
+			reloads[inventory.find("pistol")] = false
 		"rocket launcher":
 			var clone = missile.instance()
-			var scene_root = get_parent()
 			scene_root.add_child(clone)
-			print("shoot")
 			clone.global_transform = bullet_source.global_transform
 			clone.damage = 1
-			$ReloadTimer.start()
-			reloaded = false
+			clone.shooter = self
+			$Reloads/MissileReloadTimer.start()
+			reloads[inventory.find("rocket launcher")] = false
 		"shotgun":
 			for shot in shotgun_shots:
 				var clone = bullet.instance()
-				var scene_root = get_parent()
 				scene_root.add_child(clone)
-				print("shoot")
 				clone.global_transform = shot.global_transform
 				clone.damage = 1
 				clone.speed = 50
 				clone.life_time = 0.5
-				$ReloadTimer.start()
-				reloaded = false
+				clone.shooter = self
+			reloads[inventory.find("shotgun")] = false
+			$Reloads/ShotgunReloadTimer.start()
 
 func _on_Feet_body_entered(body):
 	if body.is_in_group("ground"):
@@ -237,3 +236,12 @@ func _on_Wall_Jump_Range_body_entered(body):
 func _on_Wall_Jump_Range_body_exited(body):
 	if body.is_in_group("wall"):
 		in_wall_range = false
+
+func _on_PistolReloadTimer_timeout():
+	reloads[inventory.find("pistol")] = true
+
+func _on_MissileReloadTimer_timeout():
+	reloads[inventory.find("rocket launcher")] = true
+
+func _on_ShotgunReloadTimer_timeout():
+	reloads[inventory.find("shotgun")] = true

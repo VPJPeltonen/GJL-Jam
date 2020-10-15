@@ -10,6 +10,7 @@ var life_time = 8
 var timer = 0
 
 var hit_something = false
+var shooter
 
 func _ready():
 	pass
@@ -21,6 +22,8 @@ func _physics_process(delta):
 	var collission = move_and_collide(forward_dir * speed * delta)
 
 	if collission != null:
+		if collission.collider == shooter:
+			return
 		explode()
 		if collission.collider.is_in_group("enemy"):
 			collission.collider.damage(damage)

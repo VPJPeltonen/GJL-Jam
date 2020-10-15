@@ -10,16 +10,16 @@
 
 [sub_resource type="CapsuleShape" id=2]
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="BoxShape" id=3]
 extents = Vector3( 1, 0.332977, 1 )
 
-[sub_resource type="CylinderShape" id=6]
+[sub_resource type="CylinderShape" id=4]
 radius = 1.87844
 height = 0.911018
 
-[sub_resource type="CylinderMesh" id=3]
+[sub_resource type="CylinderMesh" id=5]
 
-[sub_resource type="CylinderMesh" id=4]
+[sub_resource type="CylinderMesh" id=6]
 
 [node name="Player" type="KinematicBody" groups=[
 "Player",
@@ -58,17 +58,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.29082, 0 )
 input_ray_pickable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Feet"]
-shape = SubResource( 5 )
-
-[node name="ReloadTimer" type="Timer" parent="."]
-wait_time = 0.2
+shape = SubResource( 3 )
 
 [node name="Wall_Jump_Range" type="Area" parent="."]
 input_ray_pickable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Wall_Jump_Range"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.587667, 0 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="Spatial" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.399036, 0 )
@@ -103,7 +100,7 @@ transform = Transform( -0.1, 0, -3.89414e-08, 0, 0.1, 0, 3.89414e-08, 0, -0.1, 0
 [node name="missile" type="MeshInstance" parent="Guns"]
 transform = Transform( 0.1, 0, 0, 0, -2.18557e-08, -0.1, 0, 0.5, -4.37114e-09, 0.21112, -0.280761, -0.429655 )
 visible = false
-mesh = SubResource( 3 )
+mesh = SubResource( 5 )
 material/0 = null
 
 [node name="Shotgun" type="Spatial" parent="Guns"]
@@ -112,12 +109,12 @@ visible = false
 
 [node name="Mesh" type="MeshInstance" parent="Guns/Shotgun"]
 transform = Transform( 0.05, 0, 0, 0, -1.31134e-08, -0.05, 0, 0.3, -2.18557e-09, 0.0714855, -0.144274, -0.347721 )
-mesh = SubResource( 4 )
+mesh = SubResource( 6 )
 material/0 = null
 
 [node name="Mesh2" type="MeshInstance" parent="Guns/Shotgun"]
 transform = Transform( 0.05, 0, 0, 0, -1.31134e-08, -0.05, 0, 0.3, -2.18557e-09, 0.148928, -0.144274, -0.347721 )
-mesh = SubResource( 4 )
+mesh = SubResource( 6 )
 material/0 = null
 
 [node name="shots" type="Spatial" parent="Guns/Shotgun"]
@@ -136,8 +133,20 @@ transform = Transform( 0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848,
 
 [node name="Position3D5" type="Position3D" parent="Guns/Shotgun/shots"]
 transform = Transform( 1, 0, 0, 0, 0.999848, 0.0174524, 0, -0.0174524, 0.999848, 0, 0, -1.72523 )
+
+[node name="Reloads" type="Node" parent="."]
+
+[node name="PistolReloadTimer" type="Timer" parent="Reloads"]
+wait_time = 0.2
+
+[node name="ShotgunReloadTimer" type="Timer" parent="Reloads"]
+wait_time = 0.5
+
+[node name="MissileReloadTimer" type="Timer" parent="Reloads"]
 [connection signal="body_entered" from="Feet" to="." method="_on_Feet_body_entered"]
 [connection signal="body_exited" from="Feet" to="." method="_on_Feet_body_exited"]
-[connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
 [connection signal="body_entered" from="Wall_Jump_Range" to="." method="_on_Wall_Jump_Range_body_entered"]
 [connection signal="body_exited" from="Wall_Jump_Range" to="." method="_on_Wall_Jump_Range_body_exited"]
+[connection signal="timeout" from="Reloads/PistolReloadTimer" to="." method="_on_PistolReloadTimer_timeout"]
+[connection signal="timeout" from="Reloads/ShotgunReloadTimer" to="." method="_on_ShotgunReloadTimer_timeout"]
+[connection signal="timeout" from="Reloads/MissileReloadTimer" to="." method="_on_MissileReloadTimer_timeout"]
