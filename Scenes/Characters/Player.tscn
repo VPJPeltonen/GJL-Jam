@@ -131,6 +131,7 @@ tracks/0/keys = PoolRealArray( 0, 1, -0.00804329, 0.00943741, -0.0343689, -0.074
 [sub_resource type="Animation" id=9]
 resource_name = "GunIdle"
 length = 2.83333
+loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Gun/Skeleton:bone")
 tracks/0/interp = 1
@@ -420,6 +421,7 @@ transform = Transform( 1, 0, 0, 0, 0.999848, 0.0174524, 0, -0.0174524, 0.999848,
 transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 0.0968768, -0.232105, -0.179681 )
 
 [node name="Gun" type="Spatial" parent="Guns/Guns"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000387395, 0 )
 
 [node name="Skeleton" type="Skeleton" parent="Guns/Guns/Gun"]
 bones/0/name = "bone"

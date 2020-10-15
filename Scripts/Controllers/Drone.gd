@@ -28,6 +28,8 @@ func _ready():
 	rng.randomize()
 	
 func _physics_process(delta):
+	if Player == null:
+		Player = get_tree().get_nodes_in_group("Player")[0]
 	hover()
 	match state:
 		"default":
@@ -37,8 +39,8 @@ func _physics_process(delta):
 			move()
 		"shoot":
 			shoot()
-			var look_pos = Vector3(Player.global_transform.origin.x,global_transform.origin.y,Player.global_transform.origin.z)
-			look_at(look_pos,Vector3.UP)
+			#var look_pos = Vector3(Player.global_transform.origin.x,global_transform.origin.y,Player.global_transform.origin.z)
+			look_at(Player.global_transform.origin,Vector3.UP)
 			#animation_tree.set("parameters/Running/blend_position",0)
 			animation_tree.set("parameters/Trigger Shooting/active",true)
 			stay_in_range()

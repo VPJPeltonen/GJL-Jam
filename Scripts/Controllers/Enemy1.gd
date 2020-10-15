@@ -28,6 +28,8 @@ func _ready():
 	rng.randomize()
 	
 func _physics_process(delta):
+	if Player == null:
+		Player = get_tree().get_nodes_in_group("Player")[0]
 	match state:
 		"default":
 			look_for_player()
@@ -65,6 +67,8 @@ func stay_in_range():
 			state = "default"
 			
 func look_for_player():
+	if Player == null:
+		Player = get_tree().get_nodes_in_group("Player")[0]
 	var distance = global_transform.origin.distance_to(Player.global_transform.origin) 
 	if distance < spot_range:
 		var space_state = get_world().direct_space_state

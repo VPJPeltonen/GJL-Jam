@@ -37,7 +37,7 @@ onready var shotgun_shots = $Guns/Shotgun/shots.get_children()
 onready var animation_tree = $Guns/Guns/AnimationPlayer/AnimationTree
 
 func _input(event):
-	if frozen:
+	if frozen or Game.over:
 		return
 		
 	if event is InputEventMouseMotion and Mouse.mouse_captured:
@@ -63,11 +63,13 @@ func _input(event):
 				switch_weapon()
 
 func _process(delta):
+	if frozen or Game.over:
+		return
 	change_weapon()
 	UI.update_time_meter(current_time)
-	sun.light_energy = (current_time/max_time)-0.2
-	world.environment.background_sky.sky_energy = (current_time/max_time)-0.2
-	world.environment.background_sky.sun_energy = (current_time/max_time)-0.2
+	sun.light_energy = (current_time/max_time)
+	world.environment.background_sky.sky_energy = (current_time/max_time)
+	world.environment.background_sky.sun_energy = (current_time/max_time)
 	if bullet_time_toggled:
 		current_time -= 100*delta
 	elif current_time < 100:
@@ -78,6 +80,8 @@ func _process(delta):
 		shoot()
 		
 func _physics_process(delta):
+	if frozen or Game.over:
+		return
 	move_state = "stand"
 	if frozen:
 		return
@@ -106,7 +110,10 @@ func switch_weapon():
 
 func damage(damage):
 	current_time -= damage
-	#if health <= 0:
+	if current_time <= 0:
+		Game.over = true
+		Mouse.free_mouse(true)
+		Engine.set_time_scale(0.01)
 		#queue_free()
 
 func toggle_bullet_time(toggle):
@@ -158,7 +165,7 @@ func movement(delta):
 			wall_jump()
 	velocity = move_and_slide(velocity, Vector3.UP)
 	var veloc = velocity.normalized()
-	animation_tree.set("parameters/BlendSpace2D/blend_position",Vector2(veloc.x,veloc.y))
+	#animation_tree.set("parameters/BlendSpace2D/blend_position",Vector2(veloc.x,veloc.y))
 	
 func wall_jump():
 	var dir = Vector3(0,0,0)
