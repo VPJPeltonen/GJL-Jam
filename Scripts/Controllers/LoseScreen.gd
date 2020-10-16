@@ -5,5 +5,6 @@ func _process(delta):
 		$Sceen.show()
 
 func _on_Button_pressed():
-	get_parent().restart()
+	var main = get_tree().get_nodes_in_group("main")[0]
+	main.restart()
 	hide()

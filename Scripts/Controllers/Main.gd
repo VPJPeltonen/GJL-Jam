@@ -12,7 +12,9 @@ func _ready():
 #	pass
 
 func restart():
-	$VPJTestScene.queue_free()
+	var children = get_children()
+	for child in children:
+		child.queue_free()
 	var map = test_map.instance()
 	add_child(map)
 	map.global_transform = global_transform
