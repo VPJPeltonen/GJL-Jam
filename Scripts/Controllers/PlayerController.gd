@@ -27,6 +27,7 @@ var move_state = "stand"
 var current_time = 100
 var max_time = 100
 var bullet_time_toggled = false
+var gun_v = Vector2(0,0)
 
 onready var UI = get_parent().get_node("UI")
 onready var bullet_source = get_node("Head/Camera/Position3D")
@@ -165,7 +166,7 @@ func movement(delta):
 			wall_jump()
 	velocity = move_and_slide(velocity, Vector3.UP)
 	var veloc = velocity.normalized()
-	#animation_tree.set("parameters/BlendSpace2D/blend_position",Vector2(veloc.x,veloc.y))
+	animation_tree.set("parameters/BlendSpace2D/blend_position",Vector2(0,veloc.y))
 	
 func wall_jump():
 	var dir = Vector3(0,0,0)

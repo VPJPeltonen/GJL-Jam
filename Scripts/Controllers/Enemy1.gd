@@ -2,7 +2,7 @@ extends KinematicBody
 
 export(Resource) var bullet
 
-export var speed = 5.0
+export var speed = 10.0
 
 var path = []
 var state = "default"
@@ -39,7 +39,7 @@ func _physics_process(delta):
 		"shoot":
 			shoot()
 			var look_pos = Vector3(Player.global_transform.origin.x,global_transform.origin.y,Player.global_transform.origin.z)
-			look_at(look_pos,Vector3.UP)
+			look_at(Player.global_transform.origin,Vector3.UP)
 			animation_tree.set("parameters/Running/blend_position",0)
 			animation_tree.set("parameters/toggle SHOOTING/active",true)
 			stay_in_range()

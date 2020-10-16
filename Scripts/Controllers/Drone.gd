@@ -2,7 +2,7 @@ extends KinematicBody
 
 export(Resource) var bullet
 
-export var speed = 10.0
+export var speed = 20.0
 
 var path = []
 var state = "default"
@@ -76,6 +76,8 @@ func look_for_player():
 	if distance < spot_range:
 		var space_state = get_world().direct_space_state
 		var result = space_state.intersect_ray(global_transform.origin, Player.global_transform.origin, [self])
+		if result.empty():
+			return
 		if result.collider.is_in_group("Player"):
 			state = "shoot"
 
