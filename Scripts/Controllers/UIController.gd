@@ -12,3 +12,6 @@ func _ready():
 
 func update_time_meter(time):
 	$Time/Bar.value = time
+
+func update_time_meter_max(new_max):
+	$Time/Bar.max_value = new_max

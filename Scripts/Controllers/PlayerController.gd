@@ -28,6 +28,7 @@ var current_time = 100
 var max_time = 100
 var bullet_time_toggled = false
 var gun_v = Vector2(0,0)
+var bullet_time_cost = 100
 
 onready var UI = get_parent().get_node("UI")
 onready var bullet_source = get_node("Head/Camera/Position3D")
@@ -72,7 +73,7 @@ func _process(delta):
 	world.environment.background_sky.sky_energy = (current_time/max_time)
 	world.environment.background_sky.sun_energy = (current_time/max_time)
 	if bullet_time_toggled:
-		current_time -= 100*delta
+		current_time -= bullet_time_cost*delta
 	elif current_time < 100:
 		current_time += 5*delta
 	if current_time <= 0:
@@ -265,3 +266,15 @@ func _on_SwitchTimer_timeout():
 			$"Guns/Guns/Gun/Skeleton/ugly handgun001".hide()
 			$"Guns/Guns/Gun/Skeleton/Launcher001".hide()
 			$Guns/Guns/Gun/Skeleton/Shotgun001.show()
+
+func _on_RoundPassScreen_pick_done(pick):
+	match pick:
+		"Speed":
+			speed += 5
+		"Health":
+			max_time += 20
+			UI.update_time_meter_max(max_time)
+		"Time Manipulation":
+			bullet_time_cost -= 20
+			if bullet_time_cost < 0:
+				bullet_time_cost = 0
