@@ -278,3 +278,5 @@ func _on_RoundPassScreen_pick_done(pick):
 			bullet_time_cost -= 20
 			if bullet_time_cost < 0:
 				bullet_time_cost = 0
+		"Jump":
+			jump_power += 15
