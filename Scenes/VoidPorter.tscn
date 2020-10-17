@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Controllers/VoidPorter.gd" type="Script" id=1]
+
+[sub_resource type="CylinderShape" id=5]
+radius = 304.923
+height = 15.3178
+
+[node name="VoidPorter" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Catcher" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -35.6011, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Catcher"]
+shape = SubResource( 5 )
+
+[node name="Position3D" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 79.6284, 0 )
+[connection signal="body_entered" from="Catcher" to="." method="_on_Catcher_body_entered"]

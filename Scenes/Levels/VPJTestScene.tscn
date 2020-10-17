@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Props/Box.tscn" type="PackedScene" id=2]
@@ -11,7 +11,7 @@
 [ext_resource path="res://Scenes/Characters/Drone.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/UI/LoseScreen.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/UI/RoundPassScreen.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scripts/Controllers/VoidPorter.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/VoidPorter.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Guns/Rockets.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Guns/Shots.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Characters/bigboyGibs.tscn" type="PackedScene" id=15]
@@ -28,10 +28,6 @@ params_specular_mode = 3
 albedo_color = Color( 0.247059, 0.247059, 0.247059, 1 )
 
 [sub_resource type="BoxShape" id=4]
-
-[sub_resource type="CylinderShape" id=5]
-radius = 304.923
-height = 15.3178
 
 [node name="VPJTestScene" type="Spatial"]
 
@@ -161,17 +157,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.2256, 1.5414, 24.7518 )
 [node name="RoundPassScreen" parent="." instance=ExtResource( 11 )]
 visible = false
 
-[node name="VoidPorter" type="Spatial" parent="."]
-script = ExtResource( 12 )
-
-[node name="Catcher" type="Area" parent="VoidPorter"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -35.6011, 0 )
-
-[node name="CollisionShape" type="CollisionShape" parent="VoidPorter/Catcher"]
-shape = SubResource( 5 )
-
-[node name="Position3D" type="Position3D" parent="VoidPorter"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 79.6284, 0 )
+[node name="VoidPorter" parent="." instance=ExtResource( 12 )]
 
 [node name="AmmoSpawns" type="Spatial" parent="."]
 
@@ -196,4 +182,3 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.805137, -20.0638 )
 [connection signal="display_round_done" from="Director" to="RoundPassScreen" method="_on_Director_display_round_done"]
 [connection signal="pick_done" from="RoundPassScreen" to="Director" method="_on_RoundPassScreen_pick_done"]
 [connection signal="pick_done" from="RoundPassScreen" to="Player" method="_on_RoundPassScreen_pick_done"]
-[connection signal="body_entered" from="VoidPorter/Catcher" to="VoidPorter" method="_on_Catcher_body_entered"]
