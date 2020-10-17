@@ -5,7 +5,7 @@ export var acceleration = 5
 export var gravity = 1.22
 export var jump_power = 60
 export var mouse_sens = 0.3
-export var bullet_time_cheat = 200
+export var bullet_time_cheat = 1
 
 export(Resource) var bullet
 export(Resource) var missile
@@ -13,7 +13,7 @@ export(Resource) var missile
 var velocity = Vector3()
 var camera_x_rotation = 0
 
-var inventory = ["pistol","rocket launcher","shotgun"]
+var inventory = ["pistol","shotgun","rocket launcher"]
 var reloads = [true,true,true]
 var current_weapon = 0
 
@@ -26,6 +26,12 @@ var move_state = "stand"
 
 var current_time = 100
 var max_time = 100
+var current_health = 100
+var max_health = 100
+var health_regen = 1
+var current_bullet_time = 100
+var max_bullet_time = 100
+
 var bullet_time_toggled = false
 var gun_v = Vector2(0,0)
 var bullet_time_cost = 100
@@ -68,18 +74,19 @@ func _process(delta):
 	if frozen or Game.over:
 		return
 	change_weapon()
-	UI.update_time_meter(current_time)
+	UI.update_meters(current_time,current_bullet_time,current_health)
 	sun.light_energy = (current_time/max_time)
 	world.environment.background_sky.sky_energy = (current_time/max_time)
 	world.environment.background_sky.sun_energy = (current_time/max_time)
 	if bullet_time_toggled:
-		current_time -= bullet_time_cost*delta
+		current_bullet_time -= bullet_time_cost*delta
 	elif current_time < 100:
-		current_time += 5*delta
-	if current_time <= 0:
+		current_bullet_time += 5*delta
+	if current_bullet_time <= 0:
 		toggle_bullet_time(false)
 	if Input.is_action_just_pressed("shoot") and reloads[current_weapon]:#reloaded:	
 		shoot()
+	regenerate(delta)
 		
 func _physics_process(delta):
 	if frozen or Game.over:
@@ -95,6 +102,10 @@ func _physics_process(delta):
 		toggle_bullet_time(false)
 	movement(delta)
 
+func regenerate(delta):
+	if current_health < 100:
+		current_health += health_regen*delta
+		
 func change_weapon():
 	if Input.is_action_just_pressed("weapon1"):
 		current_weapon = 0
@@ -111,8 +122,8 @@ func switch_weapon():
 	$SwitchTimer.start()
 
 func damage(damage):
-	current_time -= damage
-	if current_time <= 0:
+	current_health -= damage
+	if current_health <= 0:
 		Game.over = true
 		Mouse.free_mouse(true)
 		Engine.set_time_scale(0.01)
@@ -280,3 +291,5 @@ func _on_RoundPassScreen_pick_done(pick):
 				bullet_time_cost = 0
 		"Jump":
 			jump_power += 15
+		"Health Regenration":
+			health_regen += 1

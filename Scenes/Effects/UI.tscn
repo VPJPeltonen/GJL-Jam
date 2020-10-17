@@ -1,17 +1,25 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scripts/Controllers/UIController.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Textures/white.png" type="Texture" id=2]
 [ext_resource path="res://Materials/Shaders/Visor.shader" type="Shader" id=3]
-[ext_resource path="res://Fonts/UI_32.tres" type="DynamicFont" id=4]
-
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 64, 64 )
-
-[sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 64, 64 )
+[ext_resource path="res://Assets/Textures/Health_outline.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Textures/time_bar.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Textures/time_bar_empty.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Textures/Health.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Textures/hourglassBar_outline.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Textures/hourglassBar.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Textures/mouse_Icon.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Textures/pistol_icon.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Textures/launcher_icon.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Textures/shotgun_icon.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Textures/Key.png" type="Texture" id=14]
+[ext_resource path="res://Fonts/Big_UI.tres" type="DynamicFont" id=15]
+[ext_resource path="res://Assets/Textures/timeForwards.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Textures/aim1.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Textures/aim4.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Textures/aim3.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Textures/aim2.png" type="Texture" id=20]
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 3 )
@@ -38,6 +46,7 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -52,6 +61,7 @@ __meta__ = {
 }
 
 [node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -65,28 +75,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Time" type="VBoxContainer" parent="."]
+[node name="Time" type="Control" parent="."]
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_top = -50.0
-margin_right = 113.0
+margin_left = -145.512
+margin_top = -160.467
+margin_right = 1010.49
+margin_bottom = 472.533
+rect_scale = Vector2( 0.25, 0.25 )
+
+[node name="Bar" type="TextureProgress" parent="Time"]
+margin_top = 6.0
+margin_right = 1156.0
+margin_bottom = 626.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+value = 100.0
+texture_under = ExtResource( 6 )
+texture_progress = ExtResource( 5 )
+fill_mode = 5
+radial_initial_angle = 90.0
+radial_fill_degrees = 180.0
+radial_center_offset = Vector2( 0, 300 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Label" type="Label" parent="Time"]
-margin_right = 113.0
-margin_bottom = 32.0
-custom_fonts/font = ExtResource( 4 )
-text = "Time:"
-align = 1
-
-[node name="Bar" type="ProgressBar" parent="Time"]
-margin_top = 36.0
-margin_right = 113.0
-margin_bottom = 50.0
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
 
 [node name="Overlay" type="TextureRect" parent="."]
 material = SubResource( 3 )
@@ -97,3 +112,240 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Health" type="Control" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 12.7279
+margin_top = -170.108
+margin_right = 52.7279
+margin_bottom = -130.108
+rect_scale = Vector2( 0.25, 0.25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row" type="HBoxContainer" parent="Health"]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/separation = 200
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="TextureProgress" parent="Health/Row"]
+margin_right = 596.0
+margin_bottom = 644.0
+value = 25.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 7 )
+fill_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="TextureProgress" parent="Health/Row"]
+margin_left = 796.0
+margin_right = 1185.0
+margin_bottom = 644.0
+value = 25.0
+texture_under = ExtResource( 8 )
+texture_progress = ExtResource( 9 )
+fill_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Health"]
+margin_left = 1213.0
+margin_top = 184.0
+margin_right = 1459.0
+margin_bottom = 828.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Guns" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -476.0
+margin_top = -131.0
+margin_right = 1444.0
+margin_bottom = 388.0
+rect_scale = Vector2( 0.25, 0.25 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Guns"]
+margin_left = 153.0
+margin_right = 528.0
+margin_bottom = 519.0
+
+[node name="TextureRect" type="TextureRect" parent="Guns/VBoxContainer"]
+anchor_left = 0.25
+anchor_right = 0.25
+margin_right = 375.0
+margin_bottom = 260.0
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Guns/VBoxContainer/TextureRect"]
+margin_left = 132.451
+margin_top = -56.123
+margin_right = 213.451
+margin_bottom = 143.877
+custom_fonts/font = ExtResource( 15 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="Guns/VBoxContainer"]
+margin_top = 264.0
+margin_right = 375.0
+margin_bottom = 472.0
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Guns"]
+margin_left = 532.0
+margin_right = 1040.0
+margin_bottom = 519.0
+
+[node name="TextureRect2" type="TextureRect" parent="Guns/VBoxContainer2"]
+anchor_left = 0.25
+anchor_right = 0.25
+margin_right = 508.0
+margin_bottom = 260.0
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Guns/VBoxContainer2/TextureRect2"]
+margin_left = 124.287
+margin_top = -53.8784
+margin_right = 205.287
+margin_bottom = 146.122
+custom_fonts/font = ExtResource( 15 )
+text = "2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect3" type="TextureRect" parent="Guns/VBoxContainer2"]
+margin_top = 264.0
+margin_right = 508.0
+margin_bottom = 445.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Guns"]
+margin_left = 1044.0
+margin_right = 1766.0
+margin_bottom = 519.0
+
+[node name="TextureRect3" type="TextureRect" parent="Guns/VBoxContainer3"]
+anchor_left = 0.25
+anchor_right = 0.327
+margin_right = 722.0
+margin_bottom = 260.0
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="Guns/VBoxContainer3/TextureRect3"]
+margin_left = 128.999
+margin_top = -71.8379
+margin_right = 209.999
+margin_bottom = 128.162
+custom_fonts/font = ExtResource( 15 )
+text = "3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect4" type="TextureRect" parent="Guns/VBoxContainer3"]
+margin_top = 264.0
+margin_right = 722.0
+margin_bottom = 519.0
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -217.799
+margin_top = -88.2952
+margin_right = -24.7991
+margin_bottom = 142.705
+rect_scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4.2431
+margin_top = 8.54095
+margin_right = 74.7568
+margin_bottom = 149.541
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 18 )
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -3.64844
+margin_top = -22.0811
+margin_right = 75.3516
+margin_bottom = 118.919
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 17 )
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -19.9999
+margin_top = -4.24298
+margin_right = 119.0
+margin_bottom = 136.757
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 20 )
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 7.05444
+margin_top = -4.54034
+margin_right = 146.054
+margin_bottom = 136.46
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 19 )

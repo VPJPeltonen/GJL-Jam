@@ -2,7 +2,7 @@ extends VBoxContainer
 
 signal pick_done(pick)
 
-var improvements_pool = ["Speed","Health","Time Manipulation","Jump"]
+var improvements_pool = ["Speed","Health","Time Manipulation","Jump","Health Regenaration"]
 var stored_improvements = ["Speed","Health","Time Manipulation"]
 
 var rng = RandomNumberGenerator.new()

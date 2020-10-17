@@ -10,8 +10,10 @@ extends Control
 func _ready():
 	pass # Replace with function body.
 
-func update_time_meter(time):
+func update_meters(time,bullet_time,health):
 	$Time/Bar.value = time
+	$Health/Row/Time.value = bullet_time
+	$Health/Row/Health.value = health
 
 func update_time_meter_max(new_max):
 	$Time/Bar.max_value = new_max
