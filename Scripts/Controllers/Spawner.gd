@@ -21,6 +21,7 @@ func _on_Director_spawn_enemies(amount):
 		spawn_amount -= 1
 
 func _on_Timer_timeout():
+	print("spawning")
 	var point = rng.randi_range(0,spawn_points.size()-1)
 	var spawnable = rng.randi_range(0,basic_enemies.size()-1)
 	var clone = basic_enemies[spawnable].instance()

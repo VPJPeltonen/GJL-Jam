@@ -10,7 +10,8 @@ var current_target
 var current_node = 0
 
 var health = 3
-
+var gravity = 1.22
+ 
 var spot_range = 25.0
 var shoot_range = 100.0
 var reloaded = true
@@ -102,7 +103,9 @@ func move():
 		if dir.length() < 3:
 			current_node += 1
 		else:
+			dir.y -= gravity
 			move_and_slide(dir.normalized() * speed, Vector3.UP )	
+			
 			
 	else:
 		move_to(walk_point[rng.randi_range(0,3)].global_transform.origin)

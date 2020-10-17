@@ -1049,7 +1049,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.119122, -0.0403484, -1.78525
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="BulletSource"]
 stream = ExtResource( 5 )
-unit_db = 10.0
+unit_db = 20.0
 
 [node name="Drone" type="Spatial" parent="."]
 transform = Transform( -0.999118, 0, 0.0419976, 0, 1, 0, -0.0419976, 0, -0.999118, 0, -2.59387, 0 )

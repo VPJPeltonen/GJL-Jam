@@ -28,7 +28,6 @@ material/0 = SubResource( 2 )
 shape = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
 autostart = true
 
 [node name="OmniLight" type="OmniLight" parent="."]

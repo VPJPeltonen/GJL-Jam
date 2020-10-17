@@ -1,7 +1,7 @@
 extends Area
 
 var size = Vector3(1.0,1.0,1.0)
-var grow_speed = Vector3(1.0,1.0,1.0)
+var grow_speed = Vector3(2.5,2.5,2.5)
 var damage = 5
 
 #func _ready():

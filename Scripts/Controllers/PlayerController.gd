@@ -41,8 +41,8 @@ var bullet_time_cost = 100
 
 onready var UI = get_parent().get_node("UI")
 onready var bullet_source = get_node("Head/Camera/Position3D")
-onready var sun = get_parent().get_node("Enviroment/Lighting/Sun")
-onready var world = get_parent().get_node("Enviroment/Lighting/WorldEnvironment")
+onready var sun = get_parent().get_node("Enviroment/SeizeTheDayMAP/Lighting/Sun")
+onready var world = get_parent().get_node("Enviroment/SeizeTheDayMAP/Lighting/WorldEnvironment")
 onready var raycasts = [$RayCast,$RayCast2,$RayCast3,$RayCast4]
 onready var shotgun_shots = $Guns/Shotgun/shots.get_children()
 onready var animation_tree = $Guns/Guns/AnimationPlayer/AnimationTree
