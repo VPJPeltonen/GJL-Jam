@@ -193,6 +193,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 79.6284, 0 )
 [connection signal="timeout" from="Enviroment/Spawner/Timer" to="Enviroment/Spawner" method="_on_Timer_timeout"]
 [connection signal="display_round_done" from="Director" to="RoundPassScreen" method="_on_Director_display_round_done"]
 [connection signal="spawn_enemies" from="Director" to="Enviroment/Spawner" method="_on_Director_spawn_enemies"]
-[connection signal="pick_done" from="RoundPassScreen" to="Director" method="_on_RoundPassScreen_pick_done"]
 [connection signal="pick_done" from="RoundPassScreen" to="Player" method="_on_RoundPassScreen_pick_done"]
+[connection signal="pick_done" from="RoundPassScreen" to="Director" method="_on_RoundPassScreen_pick_done"]
 [connection signal="body_entered" from="VoidPorter/Catcher" to="VoidPorter" method="_on_Catcher_body_entered"]
