@@ -28,13 +28,13 @@ shader = ExtResource( 3 )
 shader_param/boost = 1.2
 shader_param/grille_opacity = 0.85
 shader_param/scanlines_opacity = 1.0
-shader_param/vignette_opacity = 0.2
+shader_param/vignette_opacity = 0.5
 shader_param/scanlines_speed = 2.0
 shader_param/show_grille = false
 shader_param/show_scanlines = true
 shader_param/show_vignette = false
 shader_param/show_curvature = false
-shader_param/screen_size = Vector2( 640, 360 )
+shader_param/screen_size = Vector2( 1280, 720 )
 shader_param/aberration_amount = 0.0
 shader_param/move_aberration = true
 shader_param/aberration_speed = 1.0
@@ -120,6 +120,21 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Damage" type="TextureRect" parent="."]
+visible = false
+modulate = Color( 0.556863, 0.0705882, 0.0705882, 0.215686 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="Damage"]
+wait_time = 0.2
+one_shot = true
 
 [node name="Health" type="Control" parent="."]
 anchor_top = 1.0
@@ -446,3 +461,4 @@ margin_right = 1209.2
 margin_bottom = 1063.28
 texture = ExtResource( 21 )
 expand = true
+[connection signal="timeout" from="Damage/Timer" to="." method="_on_Timer_timeout"]

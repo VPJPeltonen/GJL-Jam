@@ -127,6 +127,7 @@ func switch_weapon():
 
 func damage(damage):
 	current_health -= damage
+	UI.damage()
 	if current_health <= 0:
 		Game.over = true
 		Mouse.free_mouse(true)
