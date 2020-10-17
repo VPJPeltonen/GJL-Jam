@@ -1,10 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Controllers/UIController.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Textures/white.png" type="Texture" id=2]
 [ext_resource path="res://Materials/Shaders/Visor.shader" type="Shader" id=3]
+[ext_resource path="res://Fonts/UI_32.tres" type="DynamicFont" id=4]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 3 )
 shader_param/boost = 1.2
 shader_param/grille_opacity = 0.85
@@ -59,7 +68,7 @@ __meta__ = {
 [node name="Time" type="VBoxContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -40.0
+margin_top = -50.0
 margin_right = 113.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -67,17 +76,20 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Time"]
 margin_right = 113.0
-margin_bottom = 14.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 4 )
 text = "Time:"
 align = 1
 
 [node name="Bar" type="ProgressBar" parent="Time"]
-margin_top = 18.0
+margin_top = 36.0
 margin_right = 113.0
-margin_bottom = 32.0
+margin_bottom = 50.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
 
 [node name="Overlay" type="TextureRect" parent="."]
-material = SubResource( 1 )
+material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )

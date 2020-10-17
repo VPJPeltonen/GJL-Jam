@@ -39,7 +39,7 @@ func _physics_process(delta):
 		"shoot":
 			shoot()
 			var look_pos = Vector3(Player.global_transform.origin.x,global_transform.origin.y,Player.global_transform.origin.z)
-			look_at(Player.global_transform.origin,Vector3.UP)
+			look_at(look_pos,Vector3.UP)
 			animation_tree.set("parameters/Running/blend_position",0)
 			animation_tree.set("parameters/toggle SHOOTING/active",true)
 			stay_in_range()
@@ -84,19 +84,17 @@ func shoot():
 	var clone = bullet.instance()
 	var scene_root = get_parent()
 	scene_root.add_child(clone)
-	print("shoot")
 	clone.global_transform = bullet_source.global_transform
 	clone.damage = 10
 	clone.speed = 100
 	$ReloadTimer.start()
 	reloaded = false
 
-
 func move():
 	if current_node < path.size():
 		var look_pos = Vector3(path[current_node].x,global_transform.origin.y,path[current_node].z)
-		look_at(look_pos,Vector3.UP)
-		#look_at(path[current_node],Vector3.UP)
+		if global_transform.origin != look_pos:
+			look_at(look_pos,Vector3.UP)
 		var dir = (path[current_node] - global_transform.origin)
 		if dir.length() < 3:
 			current_node += 1

@@ -98,7 +98,8 @@ func shoot():
 func move():
 	if current_node < path.size():
 		var look_pos = Vector3(path[current_node].x,global_transform.origin.y,path[current_node].z)
-		look_at(look_pos,Vector3.UP)
+		if global_transform.origin != look_pos:
+			look_at(look_pos,Vector3.UP)
 		#look_at(path[current_node],Vector3.UP)
 		var dir = (path[current_node] - global_transform.origin)
 		if dir.length() < 3:
