@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/weapon_shotgun.wav-68140028be1e5f4745bbce973d45ecd8.sample"
+
+[deps]
+
+source_file="res://Audio/weapon_shotgun.wav"
+dest_files=[ "res://.import/weapon_shotgun.wav-68140028be1e5f4745bbce973d45ecd8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

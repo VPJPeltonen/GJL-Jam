@@ -84,6 +84,7 @@ func look_for_player():
 func shoot():
 	if !reloaded:
 		return
+	$BulletSource/AudioStreamPlayer3D.play()
 	var clone = bullet.instance()
 	var scene_root = get_parent()
 	scene_root.add_child(clone)

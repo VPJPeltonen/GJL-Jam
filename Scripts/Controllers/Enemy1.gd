@@ -47,6 +47,8 @@ func _physics_process(delta):
 func damage(damage):
 	health -= damage
 	animation_tree.set("parameters/toggle Hurt Animation/active",true)
+	$Blood.emitting = true
+	$Blood/BloodTimer.start()
 	if health <= 0:
 		state = "dead"
 		#$EnemyArmiture001/Skeleton.physical_bones_start_simulation()
@@ -81,6 +83,7 @@ func look_for_player():
 func shoot():
 	if !reloaded:
 		return
+	$BulletSource/AudioStreamPlayer3D.play()
 	var clone = bullet.instance()
 	var scene_root = get_parent()
 	scene_root.add_child(clone)
@@ -114,3 +117,7 @@ func move_to(target):
 
 func _on_ReloadTimer_timeout():
 	reloaded = true
+
+
+func _on_BloodTimer_timeout():
+	$Blood.emitting = false

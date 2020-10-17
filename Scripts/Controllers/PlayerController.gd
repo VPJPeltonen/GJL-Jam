@@ -84,7 +84,7 @@ func _process(delta):
 	world.environment.background_sky.sun_energy = (current_time/max_time)
 	if bullet_time_toggled:
 		current_bullet_time -= bullet_time_cost*delta
-	elif current_time < 100:
+	elif current_bullet_time < 100:
 		current_bullet_time += 5*delta
 	if current_bullet_time <= 0:
 		toggle_bullet_time(false)
@@ -208,6 +208,7 @@ func shoot():
 	
 	match weapon:
 		"pistol":
+			$"Guns/Guns/Gun/Skeleton/ugly handgun001/AudioStreamPlayer3D".play()
 			animation_tree.set("parameters/GunPower/blend_position",0)
 			var clone = bullet.instance()
 			scene_root.add_child(clone)
@@ -219,6 +220,7 @@ func shoot():
 		"rocket launcher":
 			if rockets <= 0:
 				return
+			$Guns/Guns/Gun/Skeleton/Launcher001/AudioStreamPlayer3D.play()
 			animation_tree.set("parameters/GunPower/blend_position",1)
 			var clone = missile.instance()
 			scene_root.add_child(clone)
@@ -231,6 +233,7 @@ func shoot():
 		"shotgun":
 			if shots <= 0:
 				return
+			$Guns/Guns/Gun/Skeleton/Shotgun001/AudioStreamPlayer3D.play()
 			animation_tree.set("parameters/GunPower/blend_position",0.5)
 			for shot in shotgun_shots:
 				var clone = bullet.instance()
