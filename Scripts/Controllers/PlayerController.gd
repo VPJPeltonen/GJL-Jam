@@ -32,6 +32,9 @@ var health_regen = 1
 var current_bullet_time = 100
 var max_bullet_time = 100
 
+var rockets = 0
+var shots = 0
+
 var bullet_time_toggled = false
 var gun_v = Vector2(0,0)
 var bullet_time_cost = 100
@@ -75,6 +78,7 @@ func _process(delta):
 		return
 	change_weapon()
 	UI.update_meters(current_time,current_bullet_time,current_health)
+	UI.update_ammo(shots,rockets)
 	sun.light_energy = (current_time/max_time)
 	world.environment.background_sky.sky_energy = (current_time/max_time)
 	world.environment.background_sky.sun_energy = (current_time/max_time)
@@ -212,6 +216,8 @@ func shoot():
 			$Reloads/PistolReloadTimer.start()
 			reloads[inventory.find("pistol")] = false
 		"rocket launcher":
+			if rockets <= 0:
+				return
 			animation_tree.set("parameters/GunPower/blend_position",1)
 			var clone = missile.instance()
 			scene_root.add_child(clone)
@@ -220,7 +226,10 @@ func shoot():
 			clone.shooter = self
 			$Reloads/MissileReloadTimer.start()
 			reloads[inventory.find("rocket launcher")] = false
+			rockets -= 1
 		"shotgun":
+			if shots <= 0:
+				return
 			animation_tree.set("parameters/GunPower/blend_position",0.5)
 			for shot in shotgun_shots:
 				var clone = bullet.instance()
@@ -232,6 +241,7 @@ func shoot():
 				clone.shooter = self
 			reloads[inventory.find("shotgun")] = false
 			$Reloads/ShotgunReloadTimer.start()
+			shots -= 1
 
 func _on_Feet_body_entered(body):
 	if body.is_in_group("ground"):

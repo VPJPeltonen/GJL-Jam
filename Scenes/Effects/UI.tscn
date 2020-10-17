@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/Controllers/UIController.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Textures/white.png" type="Texture" id=2]
@@ -20,8 +20,10 @@
 [ext_resource path="res://Assets/Textures/aim4.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Textures/aim3.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Textures/aim2.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Textures/skull.png" type="Texture" id=21]
+[ext_resource path="res://Fonts/Cardboard-Cutout.ttf" type="DynamicFontData" id=22]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/boost = 1.2
 shader_param/grille_opacity = 0.85
@@ -36,6 +38,12 @@ shader_param/screen_size = Vector2( 640, 360 )
 shader_param/aberration_amount = 0.0
 shader_param/move_aberration = true
 shader_param/aberration_speed = 1.0
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_color = Color( 1, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 22 )
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -104,7 +112,7 @@ __meta__ = {
 }
 
 [node name="Overlay" type="TextureRect" parent="."]
-material = SubResource( 3 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
@@ -168,126 +176,77 @@ __meta__ = {
 }
 
 [node name="Guns" type="HBoxContainer" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -476.0
-margin_top = -131.0
-margin_right = 1444.0
-margin_bottom = 388.0
-rect_scale = Vector2( 0.25, 0.25 )
-alignment = 1
+margin_top = -1080.0
+margin_right = 8.0
+margin_bottom = -1080.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Guns"]
-margin_left = 153.0
-margin_right = 528.0
-margin_bottom = 519.0
-
-[node name="TextureRect" type="TextureRect" parent="Guns/VBoxContainer"]
-anchor_left = 0.25
-anchor_right = 0.25
-margin_right = 375.0
-margin_bottom = 260.0
-texture = ExtResource( 14 )
+[node name="Crosshair" type="Control" parent="."]
+margin_left = 742.201
+margin_top = 991.705
+margin_right = 782.201
+margin_bottom = 1031.7
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Guns/VBoxContainer/TextureRect"]
-margin_left = 132.451
-margin_top = -56.123
-margin_right = 213.451
-margin_bottom = 143.877
-custom_fonts/font = ExtResource( 15 )
-text = "1"
+[node name="TextureRect2" type="TextureRect" parent="Crosshair"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 193.556
+margin_top = -463.164
+margin_right = 272.556
+margin_bottom = -322.164
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 18 )
+
+[node name="TextureRect3" type="TextureRect" parent="Crosshair"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 194.151
+margin_top = -493.786
+margin_right = 273.151
+margin_bottom = -352.786
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 17 )
+
+[node name="TextureRect4" type="TextureRect" parent="Crosshair"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 177.799
+margin_top = -475.948
+margin_right = 316.799
+margin_bottom = -334.948
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect2" type="TextureRect" parent="Guns/VBoxContainer"]
-margin_top = 264.0
-margin_right = 375.0
-margin_bottom = 472.0
-texture = ExtResource( 11 )
+[node name="TextureRect5" type="TextureRect" parent="Crosshair"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 204.853
+margin_top = -476.245
+margin_right = 343.853
+margin_bottom = -335.245
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Guns"]
-margin_left = 532.0
-margin_right = 1040.0
-margin_bottom = 519.0
-
-[node name="TextureRect2" type="TextureRect" parent="Guns/VBoxContainer2"]
-anchor_left = 0.25
-anchor_right = 0.25
-margin_right = 508.0
-margin_bottom = 260.0
-texture = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label2" type="Label" parent="Guns/VBoxContainer2/TextureRect2"]
-margin_left = 124.287
-margin_top = -53.8784
-margin_right = 205.287
-margin_bottom = 146.122
-custom_fonts/font = ExtResource( 15 )
-text = "2"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect3" type="TextureRect" parent="Guns/VBoxContainer2"]
-margin_top = 264.0
-margin_right = 508.0
-margin_bottom = 445.0
-texture = ExtResource( 13 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="Guns"]
-margin_left = 1044.0
-margin_right = 1766.0
-margin_bottom = 519.0
-
-[node name="TextureRect3" type="TextureRect" parent="Guns/VBoxContainer3"]
-anchor_left = 0.25
-anchor_right = 0.327
-margin_right = 722.0
-margin_bottom = 260.0
-texture = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label3" type="Label" parent="Guns/VBoxContainer3/TextureRect3"]
-margin_left = 128.999
-margin_top = -71.8379
-margin_right = 209.999
-margin_bottom = 128.162
-custom_fonts/font = ExtResource( 15 )
-text = "3"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect4" type="TextureRect" parent="Guns/VBoxContainer3"]
-margin_top = 264.0
-margin_right = 722.0
-margin_bottom = 519.0
-texture = ExtResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TimeDisplay" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -302,50 +261,188 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -4.2431
-margin_top = 8.54095
-margin_right = 74.7568
-margin_bottom = 149.541
-rect_scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 18 )
+[node name="Shots" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
-[node name="TextureRect3" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -3.64844
-margin_top = -22.0811
-margin_right = 75.3516
-margin_bottom = 118.919
-rect_scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 17 )
+[node name="Rocket_Shots" type="Label" parent="Shots"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -139.0
+margin_top = -71.0
+margin_right = -99.0
+margin_bottom = -23.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "8"
+align = 1
 
-[node name="TextureRect4" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -19.9999
-margin_top = -4.24298
-margin_right = 119.0
-margin_bottom = 136.757
-rect_scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 20 )
+[node name="Shotgun_Shots" type="Label" parent="Shots"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -301.0
+margin_top = -74.0
+margin_right = -261.0
+margin_bottom = -26.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "8"
+align = 1
 
-[node name="TextureRect5" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 7.05444
-margin_top = -4.54034
-margin_right = 146.054
-margin_bottom = 136.46
-rect_scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 19 )
+[node name="HBoxContainer" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -970.462
+margin_top = -79.3887
+margin_right = 949.538
+margin_bottom = -79.3887
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="Control" parent="HBoxContainer"]
+margin_left = 982.418
+margin_top = -267.386
+margin_right = 1383.42
+margin_bottom = 308.614
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+margin_left = 87.0
+margin_top = -42.0
+margin_right = 305.0
+margin_bottom = 167.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TextureRect"]
+margin_left = 67.7268
+margin_top = -60.0107
+margin_right = 148.727
+margin_bottom = 139.989
+custom_fonts/font = ExtResource( 15 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+margin_left = 7.55103
+margin_top = 214.918
+margin_right = 382.551
+margin_bottom = 422.918
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="Control" parent="HBoxContainer"]
+margin_left = 1307.45
+margin_top = -279.685
+margin_right = 1835.45
+margin_bottom = 209.315
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/VBoxContainer2"]
+margin_right = 225.0
+margin_bottom = 220.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer2/TextureRect2"]
+margin_left = 80.8687
+margin_top = -59.5416
+margin_right = 161.869
+margin_bottom = 140.459
+custom_fonts/font = ExtResource( 15 )
+text = "2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/VBoxContainer2"]
+margin_left = -130.255
+margin_top = 252.674
+margin_right = 377.745
+margin_bottom = 433.674
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer3" type="Control" parent="HBoxContainer"]
+margin_left = 1618.02
+margin_top = -258.622
+margin_right = 2256.02
+margin_bottom = 311.378
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/VBoxContainer3"]
+margin_left = 33.0
+margin_top = -26.0
+margin_right = 243.0
+margin_bottom = 175.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer3/TextureRect3"]
+margin_left = 66.4583
+margin_top = -71.5011
+margin_right = 147.458
+margin_bottom = 128.499
+custom_fonts/font = ExtResource( 15 )
+text = "3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer/VBoxContainer3"]
+margin_left = -152.908
+margin_top = 214.919
+margin_right = 569.092
+margin_bottom = 469.919
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+margin_left = 1129.2
+margin_top = 983.277
+margin_right = 1209.2
+margin_bottom = 1063.28
+texture = ExtResource( 21 )
+expand = true
