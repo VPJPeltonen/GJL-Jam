@@ -8,5 +8,5 @@ func _ready():
 func _on_Time_body_entered(body):
 	if body.is_in_group("Player"):
 		body.add_time(20)
-		#get_parent().time_taken()
+		get_parent().time_taken()
 		queue_free()
