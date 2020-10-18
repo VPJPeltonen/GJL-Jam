@@ -77,7 +77,6 @@ func _process(delta):
 	if frozen or Game.over:
 		return
 	change_weapon()
-	UI.update_meters(current_time,current_bullet_time,current_health)
 	UI.update_ammo(shots,rockets)
 	sun.light_energy = (current_time/max_time)
 	world.environment.background_sky.sky_energy = (current_time/max_time)
@@ -90,7 +89,12 @@ func _process(delta):
 		toggle_bullet_time(false)
 	if Input.is_action_just_pressed("shoot") and reloads[current_weapon]:#reloaded:	
 		shoot()
+	if current_time <= max_time:
+		current_time -= delta*2
+		if current_time < 0:
+			game_over()
 	regenerate(delta)
+	UI.update_meters(current_time,current_bullet_time,current_health)
 		
 func _physics_process(delta):
 	if frozen or Game.over:
@@ -105,6 +109,11 @@ func _physics_process(delta):
 	else:
 		toggle_bullet_time(false)
 	movement(delta)
+
+func add_time(amount):
+	current_time += amount
+	if current_time > max_time:
+		current_time = max_time
 
 func regenerate(delta):
 	if current_health < 100:
@@ -129,10 +138,13 @@ func damage(damage):
 	current_health -= damage
 	UI.damage()
 	if current_health <= 0:
-		Game.over = true
-		Mouse.free_mouse(true)
-		Engine.set_time_scale(0.01)
-		#queue_free()
+		game_over()
+
+func game_over():
+	frozen = true
+	Game.over = true
+	Mouse.free_mouse(true)
+	Engine.set_time_scale(0.01)
 
 func heal(amount):
 	current_health += amount
@@ -143,11 +155,13 @@ func toggle_bullet_time(toggle):
 	if !toggle:
 		bullet_time_toggled = false
 		Engine.set_time_scale(1)
+		$Music.pitch_scale = 1
 		UI.get_node("Overlay").get_material().set_shader_param("aberration_amount",0)
 		Game.bullet_time = false
 	else:
 		bullet_time_toggled = true
 		Engine.set_time_scale(0.1)	
+		$Music.pitch_scale = 0.5
 		UI.get_node("Overlay").get_material().set_shader_param("aberration_amount",2)
 		Game.bullet_time = true
 

@@ -61,4 +61,6 @@ func _on_Option3_pressed():
 
 func _on_Director_display_round_done():
 	display_improvements()
-	#Mouse.free_mouse(false)
+
+func _on_TimeSpawner_time_taken():
+	display_improvements()

@@ -15,7 +15,7 @@ func _on_Timer_timeout():
 		var enemies = get_tree().get_nodes_in_group("enemy")
 		if enemies.size() == 0 and state == "normal":
 			print("no enemies")
-			emit_signal("display_round_done")
+			#emit_signal("display_round_done")
 			state = "waiting"
 		elif enemies.size() >= 1 and state == "waiting":
 			state = "normal"
@@ -24,3 +24,6 @@ func _on_Timer_timeout():
 func _on_RoundPassScreen_pick_done(pick):
 	emit_signal("spawn_enemies",6+current_round*4)
 	current_round += 1
+
+func _on_TimeSpawner_time_taken():
+	pass # Replace with function body.

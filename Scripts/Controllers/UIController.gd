@@ -29,6 +29,5 @@ func update_ammo(shotgun,rockets):
 	$Shots/Rocket_Shots.text = str(rockets)
 	$Shots/Shotgun_Shots.text = str(shotgun)
 
-
 func _on_Timer_timeout():
 	$Damage.hide()
