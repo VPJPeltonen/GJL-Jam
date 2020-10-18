@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Controllers/LoseScreen.gd" type="Script" id=1]
-[ext_resource path="res://Fonts/UI_32.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Fonts/Cardboard-Cutout.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Fonts/Big_UI.tres" type="DynamicFont" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 200
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 2 )
 
 [node name="LoseScreen" type="Control"]
 anchor_right = 1.0
@@ -24,10 +32,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -56.0
-margin_top = -10.0
-margin_right = 56.0
-margin_bottom = 24.0
+margin_left = -291.0
+margin_top = -89.0
+margin_right = 291.0
+margin_bottom = 89.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -35,8 +43,19 @@ __meta__ = {
 [node name="Label" type="Label" parent="Sceen/Button"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "Restart"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Sceen"]
+anchor_right = 1.0
+margin_bottom = 200.0
+custom_fonts/font = SubResource( 1 )
+text = "You ran out of time"
 align = 1
 valign = 1
 __meta__ = {

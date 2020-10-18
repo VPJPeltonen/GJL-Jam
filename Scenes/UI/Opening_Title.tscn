@@ -128,6 +128,7 @@ __meta__ = {
 }
 
 [node name="Button_display" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
