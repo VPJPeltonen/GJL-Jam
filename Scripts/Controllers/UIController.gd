@@ -18,6 +18,13 @@ func update_meters(time,bullet_time,health):
 	$Time/Bar.value = time
 	$Health/Row/Time.value = bullet_time
 	$Health/Row/Health.value = health
+	var time_left = time/2
+	var minutes = time_left / 60.0
+	var seconds = int(time_left) % 60
+	var milliseconds = (time_left - int(time_left))*1000 
+	var str_elapsed = "%02d : %02d : %03d" % [minutes, seconds, milliseconds]
+	#return str_elapsed
+	$TimeLeft.text = str_elapsed
 
 func update_time_meter_max(new_max):
 	$Time/Bar.max_value = new_max

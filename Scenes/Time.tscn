@@ -7,7 +7,7 @@
 [ext_resource path="res://Imports/Scuffed Map/gameMaterial.material" type="Material" id=5]
 
 [sub_resource type="SphereShape" id=1]
-radius = 1.63304
+radius = 3.15732
 
 [sub_resource type="ArrayMesh" id=2]
 surfaces/0 = {
@@ -35,47 +35,47 @@ surfaces/1 = {
 "vertex_count": 126
 }
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=5]
 max_value = 100.0
 _data = [ Vector2( 0.00431965, 42.9545 ), 0.0, -210.455, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=7]
-curve = SubResource( 6 )
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
 
-[sub_resource type="Curve" id=8]
+[sub_resource type="Curve" id=7]
 min_value = -200.0
 max_value = 200.0
 _data = [ Vector2( 0, -23.1818 ), 0.0, 0.0, 0, 0, Vector2( 0.267819, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.453564, -117.727 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=9]
-curve = SubResource( 8 )
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
 
-[sub_resource type="Curve" id=10]
+[sub_resource type="Curve" id=9]
 _data = [ Vector2( 0, 0 ), 0.0, -0.0964587, 0, 0, Vector2( 0.2527, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.686825, 0.598864 ), 0.0, 0.0, 0, 0, Vector2( 0.991361, 0.471591 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=11]
-curve = SubResource( 10 )
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
 
-[sub_resource type="ParticlesMaterial" id=12]
+[sub_resource type="ParticlesMaterial" id=11]
 direction = Vector3( 0, 1, 0 )
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 2.0
 angular_velocity = 258.3
 angular_velocity_random = 0.9
-linear_accel_curve = SubResource( 9 )
+linear_accel_curve = SubResource( 8 )
 tangential_accel = 60.91
-damping_curve = SubResource( 7 )
-scale_curve = SubResource( 11 )
-color_ramp = SubResource( 5 )
+damping_curve = SubResource( 6 )
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 4 )
 
-[sub_resource type="SpatialMaterial" id=13]
+[sub_resource type="SpatialMaterial" id=12]
 flags_transparent = true
 params_billboard_mode = 3
 particles_anim_h_frames = 1
@@ -88,10 +88,10 @@ emission_energy = 3.72
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="QuadMesh" id=14]
-material = SubResource( 13 )
+[sub_resource type="QuadMesh" id=13]
+material = SubResource( 12 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=14]
 length = 7.5
 loop = true
 tracks/0/type = "transform"
@@ -118,9 +118,9 @@ material/1 = ExtResource( 4 )
 
 [node name="Particles" type="Particles" parent="time_item/Cylinder001"]
 transform = Transform( 0.0727255, -0.00270605, 0.0450857, 0.00213336, 0.0855665, 0.00169449, -0.0451164, -0.000315956, 0.0727561, -0.00383789, -0.00369518, 0.000270828 )
-process_material = SubResource( 12 )
-draw_pass_1 = SubResource( 14 )
+process_material = SubResource( 11 )
+draw_pass_1 = SubResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="time_item"]
-anims/Rotate = SubResource( 3 )
+anims/Rotate = SubResource( 14 )
 [connection signal="body_entered" from="." to="." method="_on_Time_body_entered"]
