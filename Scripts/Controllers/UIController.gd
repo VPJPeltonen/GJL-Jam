@@ -17,6 +17,8 @@ func damage():
 func update_meters(time,bullet_time,health):
 	$Time/Bar.value = time
 	var mod = time/100
+	if mod > 1.0:
+		mod == 1.0
 	#if time < 25:
 		#$Time/Bar.tint_progress = Color(1,0,0,1)
 	#else:
