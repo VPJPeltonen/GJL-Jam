@@ -1,7 +1,7 @@
 extends Area
 
 func _ready():
-	$AnimationPlayer.play("Hover")
+	$Spatial/AnimationPlayer.play("Hover")
 
 func _on_Rockets_body_entered(body):
 	if body.is_in_group("Player"):

@@ -4,37 +4,50 @@
 [ext_resource path="res://Materials/basic.tres" type="Material" id=2]
 [ext_resource path="res://Assets/Models/rocket_arraymesh.tres" type="ArrayMesh" id=3]
 
-[sub_resource type="SphereShape" id=1]
-radius = 1.62476
-
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Hover"
 length = 2.0
 loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance:translation")
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:translation:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, -0.627865 ), Vector3( 0, 0.5, -0.628 ), Vector3( 0, 0, -0.627865 ) ]
+"points": PoolRealArray( -0.1, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.25, 0, -0.1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 2 )
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 359, 0 ) ]
+}
+
+[sub_resource type="SphereShape" id=2]
+radius = 1.62476
 
 [node name="Rockets" type="Area"]
 script = ExtResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.627865 )
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 0.995124, 0, -0.0986299, 0, 1, 0, 0.0986299, 0, 0.995124, 0, -0.0993409, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.552571 )
 mesh = ExtResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 1 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Spatial"]
+anims/Hover = SubResource( 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Hover = SubResource( 2 )
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
 [connection signal="body_entered" from="." to="." method="_on_Rockets_body_entered"]
