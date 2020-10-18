@@ -148,6 +148,7 @@ func game_over():
 
 func heal(amount):
 	current_health += amount
+	$Health.play()
 	if current_health > max_health:
 		current_health = max_health
 
