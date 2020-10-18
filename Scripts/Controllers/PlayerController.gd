@@ -297,8 +297,8 @@ func _on_RoundPassScreen_pick_done(pick):
 		"Speed":
 			speed += 5
 		"Health":
-			max_time += 20
-			UI.update_time_meter_max(max_time)
+			max_health += 20
+			UI.update_health_meter_max(max_health)
 		"Time Manipulation":
 			bullet_time_cost -= 20
 			if bullet_time_cost < 0:

@@ -42,7 +42,6 @@ tracks/0/keys = {
 }
 
 [node name="Shots" type="Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.9725, 0.69717, -31.9947 )
 script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

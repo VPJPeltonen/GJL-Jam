@@ -294,7 +294,7 @@ nodes/Shoot/position = Vector2( 680, 180 )
 nodes/SwitchGun/node = SubResource( 35 )
 nodes/SwitchGun/position = Vector2( 500, 180 )
 nodes/output/position = Vector2( 1060, 180 )
-node_connections = [ "output", 0, "OneShot", "Shoot", 0, "SwitchGun", "Shoot", 1, "GunPower", "OneShot", 0, "Shoot", "OneShot", 1, "Animation 2", "SwitchGun", 0, "BlendSpace2D", "SwitchGun", 1, "Animation" ]
+node_connections = [ "output", 0, "OneShot", "SwitchGun", 0, "BlendSpace2D", "SwitchGun", 1, "Animation", "Shoot", 0, "SwitchGun", "Shoot", 1, "GunPower", "OneShot", 0, "Shoot", "OneShot", 1, "Animation 2" ]
 
 [node name="Player" type="KinematicBody" groups=[
 "Player",
@@ -414,7 +414,7 @@ transform = Transform( 1, 0, 0, 0, 0.999848, 0.0174524, 0, -0.0174524, 0.999848,
 transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 0.0968768, -0.232105, -0.179681 )
 
 [node name="Gun" type="Spatial" parent="Guns/Guns"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00299208, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00127413, 0 )
 
 [node name="Skeleton" type="Skeleton" parent="Guns/Guns/Gun"]
 bones/0/name = "bone"

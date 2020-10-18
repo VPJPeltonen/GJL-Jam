@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/Effects/Lighting.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Characters/Director.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Props/Wall.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/Controllers/Spawner.gd" type="Script" id=7]
 [ext_resource path="res://Imports/Enemy1/Enemy1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Characters/Drone.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/UI/LoseScreen.tscn" type="PackedScene" id=10]
@@ -37,7 +37,28 @@ albedo_color = Color( 0.247059, 0.247059, 0.247059, 1 )
 
 [node name="Lighting" parent="Enviroment" instance=ExtResource( 4 )]
 
-[node name="Spawner" parent="Enviroment" instance=ExtResource( 7 )]
+[node name="Spawner" type="Spatial" parent="Enviroment"]
+script = ExtResource( 7 )
+enemy1 = ExtResource( 8 )
+drone = ExtResource( 9 )
+
+[node name="Timer" type="Timer" parent="Enviroment/Spawner"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Points" type="Spatial" parent="Enviroment/Spawner"]
+
+[node name="SpawnPoint" type="Position3D" parent="Enviroment/Spawner/Points"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2219, 0, -39.7606 )
+
+[node name="SpawnPoint2" type="Position3D" parent="Enviroment/Spawner/Points"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40.7236, 0, -39.7606 )
+
+[node name="SpawnPoint3" type="Position3D" parent="Enviroment/Spawner/Points"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40.7236, 0, 39.5851 )
+
+[node name="SpawnPoint4" type="Position3D" parent="Enviroment/Spawner/Points"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.3829, 0, 39.5851 )
 
 [node name="Navigation" type="Navigation" parent="Enviroment"]
 
@@ -179,6 +200,7 @@ transform = Transform( 0.999926, 0, -0.0121821, 0, 1, 0, 0.0121821, 0, 0.999926,
 
 [node name="bigboyGibs" parent="." instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.805137, -20.0638 )
+[connection signal="timeout" from="Enviroment/Spawner/Timer" to="Enviroment/Spawner" method="_on_Timer_timeout"]
 [connection signal="display_round_done" from="Director" to="RoundPassScreen" method="_on_Director_display_round_done"]
-[connection signal="pick_done" from="RoundPassScreen" to="Director" method="_on_RoundPassScreen_pick_done"]
 [connection signal="pick_done" from="RoundPassScreen" to="Player" method="_on_RoundPassScreen_pick_done"]
+[connection signal="pick_done" from="RoundPassScreen" to="Director" method="_on_RoundPassScreen_pick_done"]

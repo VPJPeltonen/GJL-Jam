@@ -22,6 +22,9 @@ func update_meters(time,bullet_time,health):
 func update_time_meter_max(new_max):
 	$Time/Bar.max_value = new_max
 
+func update_health_meter_max(new_max):
+	$Health/Row/Health.max_value = new_max
+	
 func update_ammo(shotgun,rockets):
 	$Shots/Rocket_Shots.text = str(rockets)
 	$Shots/Shotgun_Shots.text = str(shotgun)

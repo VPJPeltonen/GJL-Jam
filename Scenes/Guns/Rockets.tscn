@@ -25,11 +25,10 @@ tracks/0/keys = {
 }
 
 [node name="Rockets" type="Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.69717, -31.9947 )
 script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.374777, -0.627966 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.627865 )
 mesh = ExtResource( 3 )
 material/0 = ExtResource( 2 )
 

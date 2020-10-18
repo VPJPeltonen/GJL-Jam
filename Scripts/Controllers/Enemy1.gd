@@ -96,6 +96,7 @@ func shoot():
 
 func move():
 	if current_node < path.size():
+		#print("trying to move")
 		var look_pos = Vector3(path[current_node].x,global_transform.origin.y,path[current_node].z)
 		if global_transform.origin != look_pos:
 			look_at(look_pos,Vector3.UP)
@@ -103,11 +104,10 @@ func move():
 		if dir.length() < 3:
 			current_node += 1
 		else:
-			dir.y -= gravity
+			#dir.y -= gravity
 			move_and_slide(dir.normalized() * speed, Vector3.UP )	
-			
-			
 	else:
+		#print("finding spot")
 		move_to(walk_point[rng.randi_range(0,3)].global_transform.origin)
 		
 func init(worker_model):
@@ -115,8 +115,11 @@ func init(worker_model):
 	move_to(walk_point[rng.randi_range(0,3)].global_transform.origin)
 
 func move_to(target):
-	path = nav.get_simple_path(global_transform.origin, target)
+	#print(global_transform.origin)
+	#print(target)
+	path = nav.get_simple_path(nav.get_closest_point(global_transform.origin), nav.get_closest_point(target),true)
 	current_node = 0
+	print(path)
 
 func _on_ReloadTimer_timeout():
 	reloaded = true
