@@ -143,7 +143,7 @@ func damage(damage):
 func game_over():
 	frozen = true
 	Game.over = true
-	Mouse.free_mouse(true)
+	Mouse.free_mouse(false)
 	Engine.set_time_scale(0.01)
 
 func heal(amount):
