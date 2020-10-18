@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Controllers/HealSpawn.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/MedPack.tscn" type="PackedScene" id=2]
+
+[node name="HealSpawn" type="Position3D"]
+script = ExtResource( 1 )
+heal_pack = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 8.0
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

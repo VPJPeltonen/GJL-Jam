@@ -134,6 +134,11 @@ func damage(damage):
 		Engine.set_time_scale(0.01)
 		#queue_free()
 
+func heal(amount):
+	current_health += amount
+	if current_health > max_health:
+		current_health = max_health
+
 func toggle_bullet_time(toggle):
 	if !toggle:
 		bullet_time_toggled = false
