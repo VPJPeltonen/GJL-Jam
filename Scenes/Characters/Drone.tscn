@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/Controllers/Drone.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Effects/Bullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Materials/basic.tres" type="Material" id=4]
-[ext_resource path="res://Audio/weapon_pistol.wav" type="AudioStream" id=5]
+[ext_resource path="res://Audio/enemy_fire.wav" type="AudioStream" id=5]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "DroneBody"
@@ -1024,7 +1024,7 @@ nodes/Animation/position = Vector2( -20, -200 )
 "nodes/Trigger Shooting/node" = SubResource( 28 )
 "nodes/Trigger Shooting/position" = Vector2( 580, 20 )
 nodes/output/position = Vector2( 1520, 20 )
-node_connections = [ "output", 0, "Trigger Hurt Animation", "KEEP ON", 0, "INT 0=Fans Off 1 = Fans On", "KEEP ON", 1, "INT -1=MoveBackwards 1=MoveForward 0=Still ", "INT 0=CameraFocusAim 1=CameralookAround", 0, "KEEP ON", "INT 0=CameraFocusAim 1=CameralookAround", 1, "Animation 4", "INT 0=Fans Off 1 = Fans On", 0, "Animation 2", "INT 0=Fans Off 1 = Fans On", 1, "Animation", "Trigger Alert Animation", 0, "Trigger Shooting", "Trigger Alert Animation", 1, "Animation 3", "Trigger Hurt Animation", 0, "Trigger Alert Animation", "Trigger Hurt Animation", 1, "Animation 6", "Trigger Shooting", 0, "INT 0=CameraFocusAim 1=CameralookAround", "Trigger Shooting", 1, "Animation 5" ]
+node_connections = [ "output", 0, "Trigger Hurt Animation", "KEEP ON", 0, "INT 0=Fans Off 1 = Fans On", "KEEP ON", 1, "INT -1=MoveBackwards 1=MoveForward 0=Still ", "INT 0=CameraFocusAim 1=CameralookAround", 0, "KEEP ON", "INT 0=CameraFocusAim 1=CameralookAround", 1, "Animation 4", "INT 0=Fans Off 1 = Fans On", 0, "Animation 2", "INT 0=Fans Off 1 = Fans On", 1, "Animation", "Trigger Shooting", 0, "INT 0=CameraFocusAim 1=CameralookAround", "Trigger Shooting", 1, "Animation 5", "Trigger Alert Animation", 0, "Trigger Shooting", "Trigger Alert Animation", 1, "Animation 3", "Trigger Hurt Animation", 0, "Trigger Alert Animation", "Trigger Hurt Animation", 1, "Animation 6" ]
 
 [sub_resource type="CylinderShape" id=30]
 radius = 1.21257

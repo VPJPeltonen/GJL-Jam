@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ealth.wav-deb01c44d9f5ce46ace9ff1856f2a36d.sample"
+
+[deps]
+
+source_file="res://Audio/ealth.wav"
+dest_files=[ "res://.import/ealth.wav-deb01c44d9f5ce46ace9ff1856f2a36d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

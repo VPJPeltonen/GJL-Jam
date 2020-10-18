@@ -4,8 +4,8 @@ var size = Vector3(1.0,1.0,1.0)
 var grow_speed = Vector3(2.5,2.5,2.5)
 var damage = 5
 
-#func _ready():
-	#$AnimatedSprite3D.play("default")
+func _ready():
+	$AudioStreamPlayer3D.play()
 
 func _process(delta):
 	size += grow_speed*delta*4

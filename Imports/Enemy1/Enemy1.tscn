@@ -4,7 +4,7 @@
 [ext_resource path="res://Materials/basic.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/Controllers/Enemy1.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Effects/Bullet.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Audio/weapon_pistol.wav" type="AudioStream" id=5]
+[ext_resource path="res://Audio/enemy_fire.wav" type="AudioStream" id=5]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "EnemyBase001"
@@ -2175,10 +2175,10 @@ skin = SubResource( 2 )
 material/0 = ExtResource( 2 )
 
 [node name="Physical Bone hip" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( 0.999954, -0.0096109, 0.000193298, 0.0095457, 0.990397, -0.137918, 0.00113378, 0.137913, 0.990445, 0.00030525, 1.06995, -0.165956 )
+transform = Transform( 0.999815, 0.0188764, -0.0038465, -0.0188714, 0.999821, 0.00134906, 0.00387096, -0.00127585, 0.999993, -0.00107156, 1.05411, -0.157623 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000343747, 0.0706978, 0.157713 )
-body_offset = Transform( 0.999815, 0.0188764, -0.00384651, -0.0188714, 0.999821, 0.00134906, 0.00387101, -0.00127585, 0.999993, -0.00107156, -0.0708914, -0.157623 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000343746, 0.0706978, 0.157713 )
+body_offset = Transform( 0.999815, 0.0188764, -0.00384651, -0.0188714, 0.999821, 0.00134906, 0.00387098, -0.00127585, 0.999993, -0.00107156, -0.0708914, -0.157623 )
 bone_name = "hip"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2189,10 +2189,10 @@ transform = Transform( 0.971226, -0.22833, -0.067706, -0.0104954, 0.24298, -0.96
 shape = SubResource( 3 )
 
 [node name="Physical Bone spine_1" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( 0.999588, -0.0285034, -0.00427346, 0.0281023, 0.996779, -0.0751069, 0.00640054, 0.0749554, 0.997169, -0.00826256, 1.33275, -0.0530301 )
+transform = Transform( 0.999982, 0.000179866, -0.00650483, -0.0010524, 0.99093, -0.134371, 0.00642169, 0.134375, 0.990913, -0.00208311, 1.34911, -0.106463 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0026501, 0.12413, 0.0905896 )
-body_offset = Transform( 0.999982, 0.000179863, -0.00650488, -0.0010524, 0.99093, -0.134371, 0.00642174, 0.134375, 0.990913, -0.00208311, -0.110829, -0.106463 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0026501, 0.12413, 0.0905892 )
+body_offset = Transform( 0.999982, 0.000179864, -0.00650485, -0.0010524, 0.99093, -0.134371, 0.00642172, 0.134375, 0.990913, -0.00208311, -0.110829, -0.106463 )
 bone_name = "spine_1"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2203,9 +2203,9 @@ transform = Transform( 0.948099, -0.250183, 0.196256, 0.13651, -0.237182, -0.961
 shape = SubResource( 4 )
 
 [node name="Physical Bone spine_2" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( 0.992295, -0.0440996, -0.116044, 0.0304468, 1.00883, -0.111307, 0.120102, 0.108603, 0.986988, 0.020881, 1.67828, -0.191667 )
+transform = Transform( 0.978492, 0.024825, 0.204836, 0.00227955, 0.936787, -0.120946, -0.206274, 0.129727, 0.970123, -0.036686, 1.69593, -0.222912 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00998079, 0.0700536, 0.218287 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00998087, 0.0700535, 0.218287 )
 body_offset = Transform( 0.978492, 0.024825, 0.204836, 0.00227955, 0.936787, -0.120946, -0.206274, 0.129727, 0.970123, -0.036686, -0.0392015, -0.222912 )
 bone_name = "spine_2"
 joint_constraints/bias = 0.3
@@ -2217,10 +2217,10 @@ transform = Transform( 0.990997, 0.13659, -0.0421577, -0.0617526, 0.192903, -0.9
 shape = SubResource( 5 )
 
 [node name="Physical Bone arm_1_r" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( -0.551936, -0.0917475, 0.828862, 0.299176, -0.966089, 0.0906412, 0.781583, 0.29039, 0.552418, 0.175522, 1.83225, -0.102833 )
+transform = Transform( -0.409323, 0.151684, 0.896542, 0.796267, -0.362477, 0.441684, 0.437771, 0.863229, 0.0328827, 0.220354, 1.78096, 0.0183017 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0653459, -0.0522783, 0.229853 )
-body_offset = Transform( 0.965002, -0.114575, -0.202293, 0.144811, 0.941481, -0.027307, 0.202556, 0.00695342, 0.97892, -0.0225511, 0.0460328, -0.23788 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0653458, -0.0522783, 0.229853 )
+body_offset = Transform( 0.965002, -0.114575, -0.202293, 0.144811, 0.941481, -0.027307, 0.202556, 0.00695346, 0.97892, -0.0225511, 0.0460328, -0.23788 )
 bone_name = "arm_1_r"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2231,10 +2231,10 @@ transform = Transform( 0.257131, -0.937399, -0.0723281, -0.05143, 0.0737815, -1.
 shape = SubResource( 6 )
 
 [node name="Physical Bone arm_2_r" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( -0.467337, 0.0112901, 0.884042, 0.656738, -0.68857, 0.35443, 0.605724, 0.73276, 0.310683, 0.158528, 1.40079, 0.074454 )
+transform = Transform( -0.576157, -0.113549, 0.809421, 0.787658, 0.0771114, 0.573326, -0.0807568, 0.962053, 0.0749287, 0.352085, 1.63808, 0.373941 )
 joint_type = 1
 joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11739, 0.0168163, 0.175821 )
-body_offset = Transform( 0.950401, -0.165151, -0.124571, 0.203514, 0.952762, -0.0957165, 0.119168, 0.0967257, 0.982241, -0.0868884, -0.0230835, -0.188314 )
+body_offset = Transform( 0.950401, -0.165151, -0.124571, 0.203514, 0.952762, -0.0957166, 0.119168, 0.0967257, 0.982241, -0.0868884, -0.0230835, -0.188314 )
 bone_name = "arm_2_r"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2245,10 +2245,10 @@ transform = Transform( 0.943946, -0.263414, -0.114638, -0.14732, 0.183173, -1.01
 shape = SubResource( 7 )
 
 [node name="Physical Bone hand_r" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( -0.519548, -0.34676, 0.782366, 0.784792, -0.56742, 0.270413, 0.350301, 0.752139, 0.574104, 0.212905, 1.03703, 0.296762 )
+transform = Transform( -0.561931, -0.331605, 0.758603, 0.773473, -0.0415309, 0.57059, -0.102706, 0.922915, 0.325828, 0.351033, 1.55705, 0.699825 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.298347, -0.0181449, 0.153542 )
-body_offset = Transform( 0.901766, -0.222389, -0.222748, 0.266179, 0.95563, -0.0536423, 0.201345, 0.0278202, 0.977097, -0.238873, -0.0538376, -0.209592 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.298347, -0.0181449, 0.153543 )
+body_offset = Transform( 0.901766, -0.222389, -0.222748, 0.266179, 0.95563, -0.0536423, 0.201345, 0.0278202, 0.977097, -0.238873, -0.0538375, -0.209592 )
 bone_name = "hand_r"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2259,10 +2259,10 @@ transform = Transform( 0.801772, -0.559421, 0.193464, -0.141624, -0.393471, -0.9
 shape = SubResource( 8 )
 
 [node name="Physical Bone arm_1_l" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( -0.817568, -0.241608, -0.522752, -0.0363993, -0.897151, 0.474179, -0.574784, 0.397702, 0.715416, -0.243963, 1.73344, -0.219636 )
+transform = Transform( -0.939699, -0.0244969, -0.337754, -0.266515, -0.548057, 0.740952, -0.214604, 0.782073, 0.562965, -0.273764, 1.78669, -0.100517 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.029678, -0.104594, 0.15839 )
-body_offset = Transform( 0.977619, -0.0431326, -0.206152, 0.0667085, 0.94912, 0.135954, 0.199826, -0.0995755, 0.958663, -0.000872731, 0.0757592, -0.168188 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0296779, -0.104594, 0.15839 )
+body_offset = Transform( 0.977619, -0.0431327, -0.206152, 0.0667085, 0.94912, 0.135954, 0.199826, -0.0995754, 0.958663, -0.000872731, 0.0757591, -0.168188 )
 bone_name = "arm_1_l"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2273,10 +2273,10 @@ transform = Transform( 0.624826, 0.807738, -0.0919406, -0.0493551, 0.025059, 1.0
 shape = SubResource( 9 )
 
 [node name="Physical Bone arm_2_l" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( -0.176929, 0.93102, -0.319362, -0.811932, 0.0539937, 0.614545, 0.552635, 0.360563, 0.746539, -0.395002, 1.38653, -0.0269759 )
+transform = Transform( 0.0130652, 0.997136, -0.0657609, -0.685169, 0.0637949, 0.658978, 0.660322, 0.0360902, 0.740943, -0.343324, 1.59421, 0.198241 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0879622, -0.0468809, 0.141981 )
-body_offset = Transform( 0.946784, -0.108095, 0.0333956, 0.0953469, 0.977859, 0.184819, -0.0126554, -0.178211, 0.975859, 0.0734721, 0.027989, -0.148021 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0879622, -0.0468807, 0.141981 )
+body_offset = Transform( 0.946784, -0.108095, 0.0333956, 0.0953469, 0.977859, 0.184819, -0.0126553, -0.178211, 0.975859, 0.0734721, 0.0279889, -0.148021 )
 bone_name = "arm_2_l"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2287,10 +2287,10 @@ transform = Transform( 0.967647, -0.263286, -0.0824837, 0.0888566, 0.230492, 0.9
 shape = SubResource( 10 )
 
 [node name="Physical Bone hand_l" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( -0.554215, 0.447074, -0.702186, -0.762883, 0.100093, 0.669182, 0.339392, 0.88803, 0.298243, -0.0482992, 1.429, 0.164298 )
+transform = Transform( -0.412837, 0.707692, -0.572287, -0.652809, 0.177681, 0.670856, 0.575217, 0.682239, 0.435891, 0.0461792, 1.6449, 0.263 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0265276, -0.0358555, 0.185349 )
-body_offset = Transform( 0.957213, -0.123412, 0.0258342, 0.105749, 0.976888, 0.181558, 0.00530176, -0.168248, 0.966401, 0.0161793, 0.00418047, -0.185013 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0265276, -0.0358554, 0.185349 )
+body_offset = Transform( 0.957213, -0.123412, 0.0258342, 0.105749, 0.976888, 0.181558, 0.0053018, -0.168248, 0.966401, 0.0161793, 0.00418049, -0.185013 )
 bone_name = "hand_l"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2301,10 +2301,10 @@ transform = Transform( 0.28406, 0.899946, 0.209767, -0.386611, 0.339715, -0.8582
 shape = SubResource( 11 )
 
 [node name="Physical Bone leg_controler" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( 0.990272, -0.137528, 0.0212205, 0.138991, 0.984939, -0.102845, -0.00675654, 0.104794, 0.994472, -0.00166956, 1.05658, -0.094152 )
+transform = Transform( 0.999762, 0.00124162, 0.0218386, -0.000904988, 0.999881, -0.0154357, -0.0218549, 0.0154127, 0.999643, -0.0115767, 1.05602, -0.088171 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00958455, 0.0703485, 0.0873274 )
-body_offset = Transform( 0.999656, 0.0260183, -0.00373133, -0.0260752, 0.999533, -0.0159816, 0.003314, 0.0160738, 0.999866, -0.0110858, -0.06867, -0.0884782 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0095846, 0.0703484, 0.0873274 )
+body_offset = Transform( 0.999656, 0.0260183, -0.0037313, -0.0260752, 0.999533, -0.0159816, 0.00331402, 0.0160738, 0.999866, -0.0110858, -0.06867, -0.0884782 )
 bone_name = "leg_controler"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2315,10 +2315,10 @@ transform = Transform( 1, -3.72529e-09, 0, 7.45058e-09, 1, -7.45058e-09, 0, -7.4
 shape = SubResource( 12 )
 
 [node name="Physical Bone leg_1_r" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( 0.965859, 0.257015, 0.0325402, 0.245769, -0.869302, -0.428851, -0.0819345, 0.422207, -0.902789, 0.161596, 1.24627, 0.215323 )
+transform = Transform( 0.972519, 0.19814, -0.122266, 0.232465, -0.797037, 0.557398, 0.0129917, -0.570502, -0.821193, 0.20421, 1.00144, 0.117773 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0127622, -0.0692008, 0.233714 )
-body_offset = Transform( 0.989441, 0.00456029, -0.144868, -0.101281, 0.736737, -0.668551, 0.103681, 0.676164, 0.729419, 0.0215457, 0.208525, -0.125007 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0127622, -0.0692011, 0.233713 )
+body_offset = Transform( 0.989441, 0.0045603, -0.144868, -0.101281, 0.736737, -0.668551, 0.103681, 0.676164, 0.729419, 0.0215457, 0.208525, -0.125007 )
 bone_name = "leg_1_r"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2329,10 +2329,10 @@ transform = Transform( 0.98682, 0.0753822, -0.143183, 0.0133391, 0.843952, 0.536
 shape = SubResource( 13 )
 
 [node name="Physical Bone leg_2_r" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( 0.974839, 0.088824, -0.204449, 0.221945, -0.472064, 0.853167, -0.0207314, -0.877078, -0.479901, 0.348655, 0.460669, 0.383941 )
+transform = Transform( 0.96613, -0.0245358, -0.256891, 0.240697, -0.273289, 0.93133, -0.0930561, -0.96162, -0.258128, 0.376434, 0.156812, -0.172681 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0239109, -0.335689, 0.466812 )
-body_offset = Transform( 0.964893, -0.166136, -0.203425, -0.0798267, 0.552376, -0.829762, 0.25022, 0.816872, 0.519722, 0.0622626, 0.570861, 0.0375849 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0239107, -0.335689, 0.466813 )
+body_offset = Transform( 0.964893, -0.166136, -0.203425, -0.0798267, 0.552376, -0.829762, 0.25022, 0.816872, 0.519722, 0.0622626, 0.570861, 0.037585 )
 bone_name = "leg_2_r"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2343,9 +2343,9 @@ transform = Transform( 0.93742, 0.344856, 0.0481802, -0.119695, 0.449073, -0.885
 shape = SubResource( 14 )
 
 [node name="Physical Bone foot_1_r" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( 0.983538, 0.103129, -0.148386, 0.179306, -0.658935, 0.730518, -0.0224403, -0.745098, -0.666578, 0.338471, 0.341039, 0.0400743 )
+transform = Transform( 0.999141, 0.0413842, 0.00274624, 0.0293793, -0.752928, 0.657448, 0.0292753, -0.656802, -0.753495, 0.34927, -0.0298883, -0.430465 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.039442, -0.478532, -0.0359296 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0394422, -0.478532, -0.0359295 )
 body_offset = Transform( 0.994263, -0.103042, 0.0287382, 0.0632757, 0.349882, -0.934654, 0.0862539, 0.931111, 0.354394, -0.00906049, 0.136344, 0.461702 )
 bone_name = "foot_1_r"
 joint_constraints/bias = 0.3
@@ -2357,10 +2357,10 @@ transform = Transform( 0.941204, 0.332709, 0.0586542, -0.161398, 0.59534, -0.787
 shape = SubResource( 15 )
 
 [node name="Physical Bone leg_1_l" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( 0.995127, -0.0911492, -0.0376133, -0.0981957, -0.950754, -0.29398, -0.00896479, 0.296242, -0.955071, -0.171591, 1.17173, 0.214909 )
+transform = Transform( 0.950977, -0.109218, -0.289335, -0.269508, -0.751544, -0.602119, -0.151686, 0.65058, -0.744136, -0.105749, 1.28503, 0.182315 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00668, -0.0620274, 0.238506 )
-body_offset = Transform( 0.991627, -0.0817585, -0.0999663, 0.122837, 0.836053, 0.534721, 0.0398595, -0.542523, 0.839096, 0.0253954, -0.0748555, -0.233514 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00668001, -0.062027, 0.238506 )
+body_offset = Transform( 0.991627, -0.0817585, -0.0999663, 0.122837, 0.836053, 0.534721, 0.0398595, -0.542523, 0.839096, 0.0253954, -0.0748556, -0.233514 )
 bone_name = "leg_1_l"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2371,10 +2371,10 @@ transform = Transform( 0.897651, -0.423853, -0.120716, 0.0302936, -0.213924, 0.9
 shape = SubResource( 16 )
 
 [node name="Physical Bone leg_2_l" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( 0.993338, 0.0860827, -0.0766243, 0.11523, -0.752764, 0.648128, -0.00188749, -0.652639, -0.757668, -0.202897, 0.535689, 0.273756 )
+transform = Transform( 0.967451, -0.112547, -0.22666, -0.0779109, -0.984623, 0.156365, -0.240773, -0.133616, -0.96134, -0.173779, 0.812852, 0.466994 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049656, 0.199, 0.412547 )
-body_offset = Transform( 0.992729, -0.00806507, -0.120108, 0.0295164, 0.983605, 0.177912, 0.116704, -0.180163, 0.976689, 0.00186038, -0.2706, -0.372873 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0496559, 0.199, 0.412547 )
+body_offset = Transform( 0.992729, -0.00806506, -0.120108, 0.0295164, 0.983605, 0.177912, 0.116704, -0.180163, 0.976689, 0.00186032, -0.2706, -0.372873 )
 bone_name = "leg_2_l"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -2385,10 +2385,10 @@ transform = Transform( 0.942702, 0.278792, 0.183266, -0.107525, 0.773871, -0.624
 shape = SubResource( 17 )
 
 [node name="Physical Bone foot_1_l" type="PhysicalBone" parent="EnemyArmiture001/Skeleton"]
-transform = Transform( 0.999624, 0.0196241, 0.0192143, 0.0237896, -0.96829, -0.248696, 0.0137251, 0.249059, -0.968391, -0.190281, 0.333683, -0.00230047 )
+transform = Transform( 0.972811, 0.0245301, -0.230305, -0.168356, -0.607983, -0.775896, -0.159054, 0.793572, -0.587321, -0.239689, 0.538007, 0.330839 )
 joint_type = 1
-joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0572035, -0.194115, 0.439189 )
-body_offset = Transform( 0.995434, 0.0410525, -0.0861846, -0.00134934, 0.908772, 0.417293, 0.0954526, -0.415271, 0.904677, -0.0111221, -0.00678696, -0.483394 )
+joint_offset = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0572034, -0.194115, 0.439188 )
+body_offset = Transform( 0.995434, 0.0410525, -0.0861846, -0.00134936, 0.908772, 0.417293, 0.0954526, -0.415271, 0.904677, -0.0111221, -0.00678699, -0.483394 )
 bone_name = "foot_1_l"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
