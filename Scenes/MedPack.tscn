@@ -19,6 +19,7 @@ loop = true
 
 [sub_resource type="Animation" id=4]
 resource_name = "medHover"
+length = 2.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Cube002:translation")
@@ -27,10 +28,29 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.25, 0 ), Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.25, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0.25, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "transform"
+tracks/1/path = NodePath("Cube002")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = PoolRealArray(  )
+tracks/2/type = "value"
+tracks/2/path = NodePath("Cube002:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ), Vector3( 90, 359, 0 ) ]
 }
 
 [sub_resource type="ArrayMesh" id=5]
@@ -60,7 +80,7 @@ anims/Shot_hover = SubResource( 3 )
 anims/medHover = SubResource( 4 )
 
 [node name="Cube002" type="MeshInstance" parent="."]
-transform = Transform( 10.3571, 0, 0, 0, 0, -10.3571, 0, 10.3571, 0, 0, 0.249913, 0 )
+transform = Transform( 10.0079, -2.66685, 4.34485e-07, 0, -1.68739e-06, -10.3571, 2.66685, 10.0079, -1.63049e-06, 0, 0.0300191, 0 )
 mesh = SubResource( 5 )
 material/0 = ExtResource( 1 )
 [connection signal="body_entered" from="." to="." method="_on_MedPack_body_entered"]
