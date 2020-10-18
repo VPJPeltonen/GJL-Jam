@@ -17,7 +17,7 @@ var inventory = ["pistol","shotgun","rocket launcher"]
 var reloads = [true,true,true]
 var current_weapon = 0
 
-var frozen = false
+var frozen = true
 var on_ground = false
 var in_wall_range = false
 var wall_in_range
@@ -326,3 +326,7 @@ func _on_RoundPassScreen_pick_done(pick):
 			jump_power += 15
 		"Health Regenration":
 			health_regen += 1
+
+
+func _on_Opening_Title_start_game():
+	frozen = false
