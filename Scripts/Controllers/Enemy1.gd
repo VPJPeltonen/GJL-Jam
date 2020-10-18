@@ -119,7 +119,7 @@ func move_to(target):
 	#print(target)
 	path = nav.get_simple_path(nav.get_closest_point(global_transform.origin), nav.get_closest_point(target),true)
 	current_node = 0
-	print(path)
+	#print(path)
 
 func _on_ReloadTimer_timeout():
 	reloaded = true

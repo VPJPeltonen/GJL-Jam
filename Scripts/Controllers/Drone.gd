@@ -11,7 +11,7 @@ var current_node = 0
 
 var health = 3
 
-var spot_range = 25.0
+var spot_range = 50.0
 var shoot_range = 100.0
 var reloaded = true
 
