@@ -124,7 +124,7 @@ __meta__ = {
 
 [node name="Damage" type="TextureRect" parent="."]
 visible = false
-modulate = Color( 0.556863, 0.0705882, 0.0705882, 0.215686 )
+modulate = Color( 0.556863, 0.0705882, 0.0705882, 0.294118 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
@@ -473,4 +473,7 @@ custom_fonts/font = ExtResource( 23 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "0:00:00"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="Damage/Timer" to="." method="_on_Timer_timeout"]
